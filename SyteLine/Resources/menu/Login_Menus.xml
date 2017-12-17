@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+       android:id="@+id/Menu_Settings"
+       android:icon="@android:drawable/ic_menu_manage"
+       android:showAsAction="never"
+       android:title="@string/Settings" />
+  <item
+       android:id="@+id/Menu_Refresh"
+       android:icon="@android:drawable/ic_popup_sync"
+       android:showAsAction="never"
+       android:title="@string/RefreshConfiguration" />
+  <item
+       android:id="@+id/Menu_OffLine"
+       android:showAsAction="never"
+       android:title="@string/OffLine" />
+</menu>

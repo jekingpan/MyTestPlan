@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+       android:id="@+id/Menu_Settings"
+       android:showAsAction="never"
+       android:title="@string/Settings" />
+  <item
+       android:id="@+id/Menu_SignOut"
+       android:showAsAction="never"
+       android:title="@string/SingOut" />
+  <item
+       android:id="@+id/Menu_CurrentConfiguration"
+       android:showAsAction="never"
+       android:title="@string/Configuration" />
+</menu>

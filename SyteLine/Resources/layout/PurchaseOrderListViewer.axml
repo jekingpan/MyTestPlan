@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PurchaseOrderLinearLayout">
+        <TextView
+            android:layout_width="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"
+            android:id="@+id/PONumrEdit"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:text="@string/PurchaseOrders" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/VendorLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/VendNumEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="100dp"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Vendor" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/VendorNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Vendor" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/DateEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="100dp"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Date" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/TypeEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="80dp"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Type" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/StatEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="80dp"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Status" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/WhseEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minWidth="50dp"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Warehouse" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

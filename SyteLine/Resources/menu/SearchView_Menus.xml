@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+        android:id="@+id/Menu_Search"
+        android:title="Search"
+        android:showAsAction="ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
+  <item
+        android:id="@+id/Menu_GetMoreRows"
+        android:icon="@android:drawable/ic_media_ff"
+        android:showAsAction="never"
+        android:title="@string/GetMoreRows" />
+  <item
+        android:id="@+id/Menu_Refresh"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:showAsAction="never"
+        android:title="@string/Refresh" />
+</menu>
