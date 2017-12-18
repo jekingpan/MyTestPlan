@@ -8,39 +8,21 @@ using SyteLine.Classes.Business.Inventory;
 using Android.Graphics;
 using SyteLine.Classes.Activities.Inventory;
 using SyteLine.Classes.Core.Common;
+using SyteLine.Classes.Adapters.Common;
 
 namespace SyteLine.Classes.Adapters.Inventory
 {
-    public class ItemsAdapter : BaseAdapter<BaseItem>
+    public class ItemsAdapter : CSIBaseAdapter
     {
-        public List<BaseItem> Items { get; }
-        Activity context;
-
-        public ItemsAdapter(Activity context, List<BaseItem> itms)
-            : base()
+        public ItemsAdapter(Activity context, List<Common.AdapterList> adpList)
+            : base(context, adpList)
         {
-            this.context = context;
-            this.Items = itms;
-        }
-
-        public override long GetItemId(int position)
-        {
-            return position;
-        }
-
-        public override BaseItem this[int position]
-        {
-            get { return Items[position]; }
-        }
-
-        public override int Count
-        {
-            get { return Items.Count; }
+            ;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = Items[position];
+            var item = objectList[position];
 
             View view = convertView;
 
@@ -55,18 +37,18 @@ namespace SyteLine.Classes.Adapters.Inventory
             ImageView LotTrackedImageView = view.FindViewById<ImageView>(Resource.Id.LotTrackedImageView);
             ImageView SNTrackedImageView = view.FindViewById<ImageView>(Resource.Id.SNTrackedImageView);
 
-            ItemEdit.SetText(item.Item, null);
-            DescriptionEdit.SetText(item.Description, null);
-            OnHandQuantityEdit.SetText(item.DerQtyOnHand, null);
-            UnitofMeasureEdit.SetText(item.UM, null);
-            LotTrackedImageView.SetImageResource(item.LotTracked?
+            ItemEdit.SetText(item.GetString("Item"), null);
+            DescriptionEdit.SetText(item.GetString("Description"), null);
+            OnHandQuantityEdit.SetText(item.GetString("DerQtyOnHand"), null);
+            UnitofMeasureEdit.SetText(item.GetString("UM"), null);
+            LotTrackedImageView.SetImageResource(item.GetBoolean("LotTracked") ?
                 Android.Resource.Drawable.CheckboxOnBackground: Android.Resource.Drawable.CheckboxOffBackground);
-            SNTrackedImageView.SetImageResource(item.SerialTracked ?
+            SNTrackedImageView.SetImageResource(item.GetBoolean("SerialTracked")  ?
                 Android.Resource.Drawable.CheckboxOnBackground : Android.Resource.Drawable.CheckboxOffBackground);
             if (new Configure().LoadPicture)
             {
                 ItemImage.Visibility = ViewStates.Visible;
-                ItemImage.SetImageBitmap(item.Picture);
+                ItemImage.SetImageBitmap(item.GetBitmap("Picture"));
             }
             else
             {

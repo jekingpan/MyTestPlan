@@ -95,59 +95,66 @@ namespace SyteLine.Classes.Core.Common
         private void ReadJsonStream(FileStream input)
         {
             JsonReader jReader = new JsonReader(new InputStreamReader(input));
-            jReader.BeginObject();
-            while (jReader.HasNext)
+            try
             {
-                string name = jReader.NextName();
-                if (name.Equals("CSIWebServerName"))
+                jReader.BeginObject();
+                while (jReader.HasNext)
                 {
-                    CSIWebServer = jReader.NextString();
+                    string name = jReader.NextName();
+                    if (name.Equals("CSIWebServerName"))
+                    {
+                        CSIWebServer = jReader.NextString();
+                    }
+                    else if (name.Equals("Configuration"))
+                    {
+                        Configuration = jReader.NextString();
+                    }
+                    else if (name.Equals("User"))
+                    {
+                        User = jReader.NextString();
+                    }
+                    else if (name.Equals("Password"))
+                    {
+                        Password = jReader.NextString();
+                    }
+                    else if (name.Equals("EnableHTTPS"))
+                    {
+                        EnableHTTPS = jReader.NextBoolean();
+                    }
+                    else if (name.Equals("UseRESTForRequest"))
+                    {
+                        UseRESTForRequest = jReader.NextBoolean();
+                    }
+                    else if (name.Equals("SaveUser"))
+                    {
+                        SaveUser = jReader.NextBoolean();
+                    }
+                    else if (name.Equals("SavePassword"))
+                    {
+                        SavePassword = jReader.NextBoolean();
+                    }
+                    else if (name.Equals("LoadPicture"))
+                    {
+                        LoadPicture = jReader.NextBoolean();
+                    }
+                    else if (name.Equals("RecordCap"))
+                    {
+                        RecordCap = jReader.NextString();
+                    }
+                    else
+                    {
+                        jReader.SkipValue();
+                    }
                 }
-                else if (name.Equals("Configuration"))
-                {
-                    Configuration = jReader.NextString();
-                }
-                else if (name.Equals("User"))
-                {
-                    User = jReader.NextString();
-                }
-                else if (name.Equals("Password"))
-                {
-                    Password = jReader.NextString();
-                }
-                else if (name.Equals("EnableHTTPS"))
-                {
-                    EnableHTTPS = jReader.NextBoolean();
-                }
-                else if (name.Equals("UseRESTForRequest"))
-                {
-                    UseRESTForRequest = jReader.NextBoolean();
-                }
-                else if (name.Equals("SaveUser"))
-                {
-                    SaveUser = jReader.NextBoolean();
-                }
-                else if (name.Equals("SavePassword"))
-                {
-                    SavePassword = jReader.NextBoolean();
-                }
-                else if (name.Equals("LoadPicture"))
-                {
-                    LoadPicture = jReader.NextBoolean();
-                }
-                else if (name.Equals("RecordCap"))
-                {
-                    RecordCap = jReader.NextString();
-                }
-                else
-                {
-                    jReader.SkipValue();
-                }
+
+                jReader.EndObject();
+                jReader.Close();
+                input.Close();
             }
-            
-            jReader.EndObject();
-            jReader.Close();
-            input.Close();
+            catch
+            {
+                SaveConfigure();
+            }
         }
         
         public string[] GetConfigurationList()

@@ -3,22 +3,22 @@ using Android.App;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
-using Android.Graphics;
 using SyteLine.Classes.Adapters.Common;
+using Android.Graphics;
 
-namespace SyteLine.Classes.Adapters.Inventory
+namespace SyteLine.Classes.Adapters.Purchase
 {
-    public class ItemDetailsAdapter : CSIBaseAdapter
+    public class PurchaseOrderDetailsAdapter : CSIBaseAdapter
     {
-        public ItemDetailsAdapter(Activity context, List<AdapterList> adpList)
+        public PurchaseOrderDetailsAdapter(Activity context, List<AdapterList> adpList)
             : base(context, adpList)
         {
             ;
         }
-
+        
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = objectList[position];
+            var obj = objectList[position];
 
             View view = convertView;
             TextView Text;
@@ -26,7 +26,7 @@ namespace SyteLine.Classes.Adapters.Inventory
             Switch Switch;
             try
             {
-                switch (item.GetKeyName())
+                switch (obj.GetKeyName())
                 {
                     case "LotTracked":
                     case "SerialTracked":
@@ -36,8 +36,8 @@ namespace SyteLine.Classes.Adapters.Inventory
                         //}
                         Switch = view.FindViewById<Switch>(Resource.Id.Switch);
                         Label = view.FindViewById<TextView>(Resource.Id.Label);
-                        Switch.Checked = item.GetBoolean(item.GetKeyName());
-                        Label.SetText(item.GetLabel(item.GetKeyName()), null);
+                        Switch.Checked = obj.GetBoolean(obj.GetKeyName());
+                        Label.SetText(obj.GetLabel(obj.GetKeyName()), null);
                         break;
                     case "Overview":
                         //if (view == null) // no view to re-use, create new
@@ -46,8 +46,8 @@ namespace SyteLine.Classes.Adapters.Inventory
                         //}
                         Text = view.FindViewById<TextView>(Resource.Id.Text);
                         Label = view.FindViewById<TextView>(Resource.Id.Label);
-                        Text.SetText((string)item.GetString(item.GetKeyName()), null);
-                        Label.SetText(item.GetLabel(item.GetKeyName()), null);
+                        Text.SetText(obj.GetString(obj.GetKeyName()), null);
+                        Label.SetText(obj.GetLabel(obj.GetKeyName()), null);
                         break;
                     case "-":
                         //if (view == null) // no view to re-use, create new
@@ -59,7 +59,7 @@ namespace SyteLine.Classes.Adapters.Inventory
                         Label.SetTextSize(Android.Util.ComplexUnitType.Pt, 12);
                         Label.SetBackgroundColor(Color.DarkGray);
                         Label.SetTextColor(Color.FloralWhite);
-                        Label.SetText(item.GetLabel(item.GetKeyName()), null);
+                        Label.SetText(obj.GetLabel(obj.GetKeyName()), null);
                         break;
                     case "--":
                         //if (view == null) // no view to re-use, create new
@@ -71,7 +71,7 @@ namespace SyteLine.Classes.Adapters.Inventory
                         Label.SetTextSize(Android.Util.ComplexUnitType.Pt, 10);
                         Label.SetBackgroundColor(Color.Gray);
                         Label.SetTextColor(Color.FloralWhite);
-                        Label.SetText(item.GetLabel(item.GetKeyName()), null);
+                        Label.SetText(obj.GetLabel(obj.GetKeyName()), null);
                         break;
                     default:
                         //if (view == null) // no view to re-use, create new
@@ -80,15 +80,15 @@ namespace SyteLine.Classes.Adapters.Inventory
                         //}
                         Text = view.FindViewById<TextView>(Resource.Id.Text);
                         Label = view.FindViewById<TextView>(Resource.Id.Label);
-                        Text.SetText((string)item.GetString(item.GetKeyName()), null);
-                        Label.SetText(item.GetLabel(item.GetKeyName()), null);
+                        Text.SetText(obj.GetString(obj.GetKeyName()), null);
+                        Label.SetText(obj.GetLabel(obj.GetKeyName()), null);
                         break;
                 }
                 return view;
             }catch (Exception Ex)
             {
                 //throw Ex;
-                Toast.MakeText(context, "ItemDetailsAdapterItem -> GetView() -> " + Ex.Message, ToastLength.Short).Show();
+                Toast.MakeText(context, "PurchaseOrderDetailsAdapter -> GetView() -> " + Ex.Message, ToastLength.Short).Show();
             }
             finally
             {

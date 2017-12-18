@@ -106,4 +106,9 @@
   <string name="AfterNext3Month">After Next 3 Month</string>
   <string name="Filled">Filled</string>
   <string name="PurchaseOrderDetails">Purchase Order Details</string>
+  <string name="OrderDate">OrderDate</string>
+  <string name="Line">Line</string>
+  <string name="OrderLine">Order Line</string>
+  <string name="Description">Description</string>
+  <string name="DueDate">Due Date</string>
 </resources>

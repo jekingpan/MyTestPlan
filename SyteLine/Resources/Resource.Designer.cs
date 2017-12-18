@@ -463,6 +463,12 @@ namespace SyteLine
 			// aapt resource value: 0x7f05005f
 			public const int Date = 2131034207;
 			
+			// aapt resource value: 0x7f05006d
+			public const int Description = 2131034221;
+			
+			// aapt resource value: 0x7f05006e
+			public const int DueDate = 2131034222;
+			
 			// aapt resource value: 0x7f05000b
 			public const int EnableHTTPS = 2131034123;
 			
@@ -514,6 +520,9 @@ namespace SyteLine
 			// aapt resource value: 0x7f05003c
 			public const int JobOrders = 2131034172;
 			
+			// aapt resource value: 0x7f05006b
+			public const int Line = 2131034219;
+			
 			// aapt resource value: 0x7f050006
 			public const int LoadPicture = 2131034118;
 			
@@ -564,6 +573,12 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05001f
 			public const int OnHandQuantity = 2131034143;
+			
+			// aapt resource value: 0x7f05006a
+			public const int OrderDate = 2131034218;
+			
+			// aapt resource value: 0x7f05006c
+			public const int OrderLine = 2131034220;
 			
 			// aapt resource value: 0x7f050059
 			public const int Ordered = 2131034201;

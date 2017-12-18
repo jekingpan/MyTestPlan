@@ -8,118 +8,21 @@ using SyteLine.Classes.Business.Inventory;
 using Android.Graphics;
 using SyteLine.Classes.Activities.Inventory;
 using SyteLine.Classes.Core.Common;
+using SyteLine.Classes.Adapters.Common;
 
-namespace SyteLine.Classes.Adapters.Inventory
+namespace SyteLine.Classes.Adapters.Purchase
 {
-    public class BasePurchaseOrder
+    public class PurchaseOrdersAdapter : CSIBaseAdapter
     {
-        public string PoNum { get; set; }
-        public string OrderDate { get; set; }
-        public string Stat { get; set; }
-        public string Type { get; set; }
-        public string VendNum { get; set; }
-        public string VendorName { get; set; }
-        public string TermsCode { get; set; }
-        public string TermsCodeDesc { get; set; }
-        public string ShipCode { get; set; }
-        public string ShipCodeDesc { get; set; }
-        public string PoCost { get; set; }
-        public string Whse { get; set; }
-        public string BuilderPoOrigSite { get; set; }
-        public string BuilderPoNum { get; set; }
-        public string DerPchChgNum { get; set; }
-        public string DerPchStat { get; set; }
-        public string VendLcrNum { get; set; }
-        public string ShipAddr { get; set; }
-        public string FormatedShipToAddress { get; set; }
-        public string Buyer { get; set; }
-        public string ReqNum { get; set; }
-
-        //public BasePurchaseOrderLine ItemLoc = new BasePurchaseOrderLine();
-
-
-        public object GetValue(string PropertyName)
+        public PurchaseOrdersAdapter(Activity context, List<AdapterList> adpList)
+            : base(context, adpList)
         {
-            switch (PropertyName)
-            {
-                case "PoNum":
-                    return PoNum;
-                case "OrderDate":
-                    return OrderDate;
-                case "Stat":
-                    return Stat;
-                case "Type":
-                    return Type;
-                case "VendNum":
-                    return VendNum;
-                case "VendorName":
-                    return VendorName;
-                case "TermsCode":
-                    return TermsCode;
-                case "TermsCodeDesc":
-                    return TermsCodeDesc;
-                case "ShipCode":
-                    return ShipCode;
-                case "ShipCodeDesc":
-                    return ShipCodeDesc;
-                case "PoCost":
-                    return PoCost;
-                case "Whse":
-                    return Whse;
-                case "BuilderPoOrigSite":
-                    return BuilderPoOrigSite;
-                case "BuilderPoNum":
-                    return BuilderPoNum;
-                case "DerPchChgNum":
-                    return DerPchChgNum;
-                case "DerPchStat":
-                    return DerPchStat;
-                case "VendLcrNum":
-                    return VendLcrNum;
-                case "ShipAddr":
-                    return ShipAddr;
-                case "FormatedShipToAddress":
-                    return FormatedShipToAddress;
-                case "Buyer":
-                    return Buyer;
-                case "ReqNum":
-                    return ReqNum;
-                default:
-                    return null;
-            }
-        }
-    }
-
-    public class PurchaseOrdersAdapter : BaseAdapter<BasePurchaseOrder>
-    {
-        public List<BasePurchaseOrder> POs { get; }
-        Activity context;
-
-        public PurchaseOrdersAdapter(Activity context, List<BasePurchaseOrder> itms)
-            : base()
-        {
-            this.context = context;
-            this.POs = itms;
-        }
-
-        public override long GetItemId(int position)
-        {
-            return position;
-        }
-
-        public override BasePurchaseOrder this[int position]
-        {
-            get { return POs[position]; }
-        }
-
-        public override int Count
-        {
-            get { return POs.Count; }
+            ;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var order = POs[position];
+            var order = objectList[position];
 
             View view = convertView;
 
@@ -134,13 +37,13 @@ namespace SyteLine.Classes.Adapters.Inventory
             TextView TypeEdit = view.FindViewById<TextView>(Resource.Id.TypeEdit);
             TextView WhseEdit = view.FindViewById<TextView>(Resource.Id.WhseEdit);
 
-            PONumEdit.SetText(order.PoNum,null);
-            VendNumEdit.SetText(order.VendNum, null);
-            VendorNameEdit.SetText(order.VendorName, null);
-            DateEdit.SetText(order.OrderDate, null);
-            StatEdit.SetText(order.Stat, null);
-            TypeEdit.SetText(order.Type, null);
-            WhseEdit.SetText(order.Whse, null);
+            PONumEdit.SetText(order.GetString("PoNum"),null);
+            VendNumEdit.SetText(order.GetString("VendNum"), null);
+            VendorNameEdit.SetText(order.GetString("VendorName"), null);
+            DateEdit.SetText(order.GetString("OrderDate"), null);
+            StatEdit.SetText(order.GetString("Stat"), null);
+            TypeEdit.SetText(order.GetString("Type"), null);
+            WhseEdit.SetText(order.GetString("Whse"), null);
 
             return view;
         }

@@ -8,6 +8,8 @@ using Android.Views;
 using SyteLine.Classes.Adapters.Inventory;
 using SyteLine.Classes.Business.Purchase;
 using static Android.Widget.AdapterView;
+using SyteLine.Classes.Adapters.Purchase;
+using SyteLine.Classes.Adapters.Common;
 
 namespace SyteLine.Classes.Activities.Purchase
 {
@@ -29,37 +31,36 @@ namespace SyteLine.Classes.Activities.Purchase
             PurchaseOrdersAdapter po = (PurchaseOrdersAdapter)ListView.Adapter;
             Intent intent = new Intent(this, typeof(PurchaseOrderDetails));
             intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
-            intent.PutExtra("PoNum", po.POs[args.Position].PoNum);
+            intent.PutExtra("PoNum", po.objectList[args.Position].GetString("PoNum"));
             StartActivity(intent);
         }
 
         protected override void RegisterAdapter(bool Append)
         {
             base.RegisterAdapter(Append);
-            List<BasePurchaseOrder> Rows;
+            List<AdapterList> Rows;
             PurchaseOrdersAdapter Adapter = (PurchaseOrdersAdapter)ListView.Adapter;
             IDOPurchaseOrders Orders = (IDOPurchaseOrders)BaseObject;
             if (!Append)
             {
-                Rows = new List<BasePurchaseOrder>();
+                Rows = new List<AdapterList>();
             }
             else
             {
-                Rows = Adapter.POs;
+                Rows = Adapter.objectList;
             }
             for (int i = 0; i < Orders.GetRowCount(); i++)
             {
                 LastKey = Orders.GetPoNum(i);
-                Rows.Add(new BasePurchaseOrder()
-                {
-                    PoNum = Orders.GetPoNum(i),
-                    VendNum = Orders.GetVendNum(i),
-                    VendorName = Orders.GetVendorName(i),
-                    Stat = Orders.GetStat(i),
-                    OrderDate = Orders.GetOrderDate(i),
-                    Whse = Orders.GetWhse(i),
-                    Type = Orders.GetType(i)
-                });
+                AdapterList adptList = new AdapterList();
+                adptList.Add("PoNum", Orders.GetPoNum(i));
+                adptList.Add("VendNum", Orders.GetVendNum(i));
+                adptList.Add("VendorName", Orders.GetVendorName(i));
+                adptList.Add("Stat", Orders.GetStat(i));
+                adptList.Add("OrderDate", Orders.GetOrderDate(i));
+                adptList.Add("Whse", Orders.GetWhse(i));
+                adptList.Add("Type", Orders.GetType(i));
+                Rows.Add(adptList);
             }
             if (!Append)
             {

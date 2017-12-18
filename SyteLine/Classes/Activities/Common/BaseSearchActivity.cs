@@ -20,6 +20,8 @@ namespace SyteLine.Classes.Activities.Common
             defaultLayoutID = Resource.Layout.CommonSearchViewer;
 
             base.OnCreate(savedInstanceState);
+
+            ListView.ItemClick += ListViewClicked;
         }
 
         protected virtual void ListViewClicked(object sender, ItemClickEventArgs args)
@@ -37,7 +39,6 @@ namespace SyteLine.Classes.Activities.Common
             LastKey = "";
 
             ListView = FindViewById<ListView>(Resource.Id.ListView);
-            ListView.ItemClick += ListViewClicked;
 
             base.InitialList();
         }

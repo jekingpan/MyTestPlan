@@ -161,19 +161,14 @@ namespace SyteLine.Classes.Business.Purchase
             return GetPropertyValue("DerItemOverview", index);
         }
 
-        public string GetQtyOrderedConv(int index = 0)
+        public string GetQtyOrderedConv(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
-            return GetPropertyValue("QtyOrderedConv", index);
+            return string.Format(Format, GetPropertyDecimalValue("QtyOrderedConv", index));
         }
 
         public string GetUM(int index = 0)
         {
             return GetPropertyValue("UM", index);
-        }
-
-        public string GetStat(int index = 0)
-        {
-            return GetPropertyValue("Stat", index);
         }
 
         public string GetPoVendNum(int index = 0)
@@ -190,6 +185,7 @@ namespace SyteLine.Classes.Business.Purchase
         {
             return GetPropertyValue("VendItem", index);
         }
+
         public string GetManufacturerId(int index = 0)
         {
             return GetPropertyValue("ManufacturerId", index);

@@ -81,6 +81,9 @@
     <Compile Include="Classes\Activities\Inventory\Inventory.cs" />
     <Compile Include="Classes\Activities\Purchase\PurchaseOrderDetails.cs" />
     <Compile Include="Classes\Activities\Purchase\PurchaseOrders.cs" />
+    <Compile Include="Classes\Adapters\Common\AdapterList.cs" />
+    <Compile Include="Classes\Adapters\Common\CSIBaseAdapter.cs" />
+    <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrderLines.cs" />
