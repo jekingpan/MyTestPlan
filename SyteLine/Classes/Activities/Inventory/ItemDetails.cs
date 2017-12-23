@@ -94,11 +94,11 @@ namespace SyteLine.Classes.Activities.Inventory
 
                 IDOItems Items = (IDOItems)BaseObject;
 
-                SetKey(Items.GetItem());
-                SetKeyDescription(Items.GetDescription());
+                SetKey(Items.GetPropertyValue("Item"));
+                SetKeyDescription(Items.GetPropertyValue("Description"));
                 if (new Configure().LoadPicture)
                 {
-                    SetImageView(Items.GetPicture());
+                    SetImageView(Items.GetPropertyBitmap("Picture"));
                 }
                 
                 ListView.Adapter = new ItemDetailsAdapter(this, AdapterLists);

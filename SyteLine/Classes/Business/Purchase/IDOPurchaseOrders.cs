@@ -42,12 +42,7 @@ namespace SyteLine.Classes.Business.Purchase
             parm.Filter = string.Format("PoNum Like N'{0}' OR VendNum Like N'{0}' OR VendorName Like N'{0}'", Value);
         }
 
-        public string GetPoNum( int index = 0)
-        {
-            return base.GetPropertyValue("PoNum", index);
-        }
-
-        public string GetOrderDate(int index = 0)
+        private string GetOrderDate(int index = 0)
         {
             try
             {
@@ -59,7 +54,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetStat(int index = 0, int rtnCode = 0)
+        private string GetStat(int index = 0, int rtnCode = 0)
         {
             string value = base.GetPropertyValue("Stat", index);
             if (rtnCode == 1 || context is null)
@@ -88,7 +83,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetType(int index = 0, int rtnCode = 0)
+        private string GetType(int index = 0, int rtnCode = 0)
         {
             string value = base.GetPropertyValue("Type", index);
             if (rtnCode == 1 || context is null)
@@ -107,85 +102,10 @@ namespace SyteLine.Classes.Business.Purchase
                 return value;
             }            
         }
-        
-        public string GetVendNum(int index = 0)
-        {
-            return base.GetPropertyValue("VendNum", index);
-        }
-        
-        public string GetVendorName(int index = 0)
-        {
-            return base.GetPropertyValue("VendorName", index);
-        }
 
-        public string GetTermsCode(int index = 0)
-        {
-            return base.GetPropertyValue("TermsCode", index);
-        }
-
-        public string GetTermsCodeDesc(int index = 0)
-        {
-            return base.GetPropertyValue("TermsCodeDesc", index);
-        }
-
-        public string GetShipCode(int index = 0)
-        {
-            return base.GetPropertyValue("ShipCode", index);
-        }
-
-        public string GetPoCost(int index = 0,string Format = "{0:###############0.000#####}")
+        private string GetPoCost(int index = 0,string Format = "{0:###############0.000#####}")
         {
             return string.Format(Format, Convert.ToDecimal(base.GetPropertyValue("PoCost", index)));
-        }
-
-        public string GetWhse(int index = 0)
-        {
-            return base.GetPropertyValue("Whse", index);
-        }
-
-        public string GetBuilderPoOrigSite(int index = 0)
-        {
-            return base.GetPropertyValue("BuilderPoOrigSite", index);
-        }
-
-        public string GetBuilderPoNum(int index = 0)
-        {
-            return base.GetPropertyValue("BuilderPoNum", index);
-        }
-
-        public string GetDerPchChgNum(int index = 0)
-        {
-            return base.GetPropertyValue("DerPchChgNum", index);
-        }
-
-        public string GetDerPchStat(int index = 0)
-        {
-            return base.GetPropertyValue("DerPchStat", index);
-        }
-
-        public string GetVendLcrNum(int index = 0)
-        {
-            return base.GetPropertyValue("VendLcrNum", index);
-        }
-
-        public string GetShipAddr(int index = 0)
-        {
-            return base.GetPropertyValue("ShipAddr", index);
-        }
-
-        public string GetFormatedShipToAddress(int index = 0)
-        {
-            return base.GetPropertyValue("FormatedShipToAddress", index);
-        }
-
-        public string GetBuyer(int index = 0)
-        {
-            return base.GetPropertyValue("Buyer", index);
-        }
-
-        public string GetReqNum(int index = 0)
-        {
-            return base.GetPropertyValue("ReqNum", index);
         }
         
         public override string GetPropertyDisplayedValue(string Name, int Row)

@@ -82,10 +82,10 @@ namespace SyteLine.Classes.Activities.Purchase
 
                 IDOPurchaseOrders POs = (IDOPurchaseOrders)BaseObject;
 
-                SetKey(POs.GetPoNum());
-                SetSubKey(POs.GetVendNum());
-                SetSubKeyDescription(POs.GetVendorName());
-                
+                SetKey(POs.GetPropertyValue("PoNum"));
+                SetSubKey(POs.GetPropertyValue("VendNum"));
+                SetSubKeyDescription(POs.GetPropertyValue("VendName"));
+
                 ListView.Adapter = new PurchaseOrderDetailsAdapter(this, AdapterLists);
 
             }

@@ -32,23 +32,8 @@ namespace SyteLine.Classes.Business.Purchase
         {
             parm.Filter = string.Format("PoNum Like N'{0}'", PoNum);
         }
-
-        public string GetPoNum(int index = 0)
-        {
-            return GetPropertyValue("PoNum", index);
-        }
-
-        public string GetPoLine(int index = 0)
-        {
-            return GetPropertyValue("PoLine", index);
-        }
-
-        public string GetVenadrName(int index = 0)
-        {
-            return GetPropertyValue("VenadrName", index);
-        }
-
-        public string GetStat(int index = 0, int rtnCode = 0)
+        
+        private string GetStat(int index = 0, int rtnCode = 0)
         {
             string value = GetPropertyValue("Stat", index);
             if (rtnCode == 1 || context is null)
@@ -77,7 +62,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetPromiseDate(int index = 0)
+        private string GetPromiseDate(int index = 0)
         {
             try
             {
@@ -89,7 +74,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetDueDate(int index = 0)
+        private string GetDueDate(int index = 0)
         {
             try
             {
@@ -101,7 +86,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetPoOrderDate(int index = 0)
+        private string GetPoOrderDate(int index = 0)
         {
             try
             {
@@ -112,7 +97,7 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetPoStat(int index = 0, int rtnCode = 0)
+        private string GetPoStat(int index = 0, int rtnCode = 0)
         {
             string value = GetPropertyValue("PoStat", index);
             if (rtnCode == 1 || context is null)
@@ -141,108 +126,9 @@ namespace SyteLine.Classes.Business.Purchase
             }
         }
 
-        public string GetWhse(int index = 0)
-        {
-            return GetPropertyValue("Whse", index);
-        }
-
-        public string GetItem(int index = 0)
-        {
-            return GetPropertyValue("Item", index);
-        }
-
-        public string GetDescription(int index = 0)
-        {
-            return GetPropertyValue("Description", index);
-        }
-
-        public string GetDerItemOverview(int index = 0)
-        {
-            return GetPropertyValue("DerItemOverview", index);
-        }
-
-        public string GetQtyOrderedConv(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
+        private string GetQtyOrderedConv(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("QtyOrderedConv", index));
-        }
-
-        public string GetUM(int index = 0)
-        {
-            return GetPropertyValue("UM", index);
-        }
-
-        public string GetPoVendNum(int index = 0)
-        {
-            return GetPropertyValue("PoVendNum", index);
-        }
-
-        public string GetPoVendorPo(int index = 0)
-        {
-            return GetPropertyValue("PoVendorPo", index);
-        }
-
-        public string GetVendItem(int index = 0)
-        {
-            return GetPropertyValue("VendItem", index);
-        }
-
-        public string GetManufacturerId(int index = 0)
-        {
-            return GetPropertyValue("ManufacturerId", index);
-        }
-
-        public string GetManufacturerName(int index = 0)
-        {
-            return GetPropertyValue("ManufacturerName", index);
-        }
-
-        public string GetManufacturerItem(int index = 0)
-        {
-            return GetPropertyValue("ManufacturerItem", index);
-        }
-
-        public string GetManufacturerItemDesc(int index = 0)
-        {
-            return GetPropertyValue("ManufacturerItemDesc", index);
-        }
-
-        public string GetRefType(int index = 0)
-        {
-            return GetPropertyValue("RefType", index);
-        }
-
-        public string GetRefNum(int index = 0)
-        {
-            return GetPropertyValue("RefNum", index);
-        }
-
-        public string GetRefLineSuf(int index = 0)
-        {
-            return GetPropertyValue("RefLineSuf", index);
-        }
-
-        public string GetRefRelease(int index = 0)
-        {
-            return GetPropertyValue("PoRefRelease", index);
-        }
-
-        public string ShipAddr(int index = 0)
-        {
-            return GetPropertyValue("ShipAddr", index);
-        }
-        public string GetDropShipNo(int index = 0)
-        {
-            return GetPropertyValue("DropShipNo", index);
-        }
-
-        public string GetDropSeq(int index = 0)
-        {
-            return GetPropertyValue("DropSeq", index);
-        }
-
-        public string GetDerShipToAddr(int index = 0)
-        {
-            return GetPropertyValue("DerShipToAddr", index);
         }
 
         public override string GetPropertyDisplayedValue(string Name, int Row)

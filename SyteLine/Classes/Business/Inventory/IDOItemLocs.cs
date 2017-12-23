@@ -53,42 +53,7 @@ namespace SyteLine.Classes.Business.Inventory
             parm.Filter = string.Format("Item Like N'{0}' OR ItmDescription Like N'{0}'", Item);
         }
 
-        public string GetItem( int index = 0)
-        {
-            return base.GetPropertyValue("Item", index);
-        }
-
-        public string GetItmDescription(int index = 0)
-        {
-            return base.GetPropertyValue("ItmDescription", index);
-        }
-
-        public string GetWhse(int index = 0)
-        {
-            return base.GetPropertyValue("Whse", index);
-        }
-
-        public string GetWhsName(int index = 0)
-        {
-            return base.GetPropertyValue("WhsName", index);
-        }
-
-        public string GetLocDescription(int index = 0)
-        {
-            return base.GetPropertyValue("LocDescription", index);
-        }
-
-        public string GetLoc(int index = 0)
-        {
-            return base.GetPropertyValue("Loc", index);
-        }
-
-        public string GetRank(int index = 0)
-        {
-            return base.GetPropertyValue("Rank", index);        }
-
-
-        public string GetLocType(int index = 0, int rtnCode = 0)
+        private string GetLocType(int index = 0, int rtnCode = 0)
         {
             string value = base.GetPropertyValue("LocType", index);
             if (rtnCode == 1 || context is null)
@@ -108,7 +73,7 @@ namespace SyteLine.Classes.Business.Inventory
             }
         }
 
-        public string GetItmIssueBy(int index = 0, int rtnCode = 0)
+        private string GetItmIssueBy(int index = 0, int rtnCode = 0)
         {
             string value = base.GetPropertyValue("ItmIssueBy", index);
             if (rtnCode == 1 || context is null)
@@ -132,28 +97,28 @@ namespace SyteLine.Classes.Business.Inventory
                 return value;
             }
         }
-        
-        public string GetQtyOnHand(int index = 0,string Format = "{0:###,###,###,###,##0.00######}")
+
+        private string GetQtyOnHand(int index = 0,string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("QtyOnHand", index));
         }
 
-        public string GetItmwhseQtyOnHand(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
+        private string GetItmwhseQtyOnHand(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("ItmwhseQtyOnHand", index));
         }
 
-        public string GetQtyRsvd(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
+        private string GetQtyRsvd(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("QtyRsvd", index));
         }
 
-        public string GetWhseTotalRsvdCO(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
+        private string GetWhseTotalRsvdCO(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("DerIWhseTotalRsvdCO", index));
         }
 
-        public string GetWhseTotalNonNetStock(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
+        private string GetWhseTotalNonNetStock(int index = 0, string Format = "{0:###,###,###,###,##0.00######}")
         {
             return string.Format(Format, GetPropertyDecimalValue("DerIWhseTotalNonNetStock", index));
         }
@@ -180,6 +145,9 @@ namespace SyteLine.Classes.Business.Inventory
                     break;
                 case "DerIWhseTotalRsvdCO":
                     value = GetWhseTotalRsvdCO(Row);
+                    break;
+                case "DerIWhseTotalNonNetStock":
+                    value = GetWhseTotalNonNetStock(Row);
                     break;
                 default:
                     break;

@@ -51,8 +51,10 @@ namespace SyteLine.Classes.Activities.Purchase
             base.PrepareIDOs();
             IDOPurchaseOrders Orders = (IDOPurchaseOrders)BaseObject;
             Orders.parm.PropertyList = "";
-            AdapterList adptList = new AdapterList();
-            adptList.KeyName = "PoNum";
+            AdapterList adptList = new AdapterList()
+            {
+                KeyName = "PoNum"
+            };
             adptList.Add("PoNum");
             adptList.Add("OrderDate", AdapterListItem.ValueTypes.Date);
             adptList.Add("Stat");
