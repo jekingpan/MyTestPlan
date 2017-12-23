@@ -6,17 +6,21 @@ using System;
 using Android.Views;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using SyteLine.Classes.Adapters.Common;
+using static SyteLine.Classes.Adapters.Common.AdapterListItem;
 
 namespace SyteLine.Classes.Activities.Common
 {
     [Activity(Label = "@string/app_name")]
-    public class BaseActivity : Activity
+    public class CSIBaseActivity : Activity
     {
         protected int defaultLayoutID = 0;
         protected TextView LoadingTextView;
         protected BaseBusinessObject BaseObject;
         protected bool HasMoreRow = false;
         protected List<BaseBusinessObject> SencondObjects = new List<BaseBusinessObject>();
+        protected List<AdapterList> AdapterLists = new List<AdapterList>();
+        protected AdapterList AdapterListTemplate = new AdapterList();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +50,50 @@ namespace SyteLine.Classes.Activities.Common
 
         }
 
+        public virtual void SetAdapterLists(int BaseObjectIndex, AdapterList adapterList)
+        {
+            string propertyList = SencondObjects[BaseObjectIndex].parm.PropertyList;
+            foreach (AdapterListItem obj in adapterList.ObjectList.Values)
+            {
+                if (!string.IsNullOrEmpty(obj.Name))
+                {
+                    if (string.IsNullOrEmpty(propertyList))
+                    {
+                        propertyList = "" + obj.Name;
+                    }
+                    else
+                    {
+                        propertyList += "," + obj.Name;
+                    }
+                }
+            }
+            SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
+            AdapterListTemplate = adapterList;
+        }
+
+        public virtual void SetAdapterLists(int BaseObjectIndex, string key, string property, ValueTypes type, string lable, int defaultLaoutID = Resource.Layout.CommonLabelTextViewer, Type defaultActivity = null)
+        {
+            string propertyList = SencondObjects[BaseObjectIndex].parm.PropertyList;
+            if (string.IsNullOrEmpty(propertyList))
+            {
+                propertyList = "" + property;
+            }
+            else
+            {
+                propertyList += "," + property;
+            }
+            if (!string.IsNullOrEmpty(property))
+            {
+                SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
+            }
+            AdapterLists.Add(new AdapterList(key, property, "", lable, type, defaultLaoutID, defaultActivity));
+        }
+
+        public virtual List<AdapterList> GetAdapterLists()
+        {
+            return AdapterLists;
+        }
+
         protected virtual void AddSecondObject(BaseBusinessObject o)
         {
             if(SencondObjects.Count == 0)
@@ -73,11 +121,11 @@ namespace SyteLine.Classes.Activities.Common
             {
                 LoadingTextView.Visibility = ViewStates.Gone;
             }
-            
         }
         
         protected virtual async void InitialList()
         {
+            AdapterLists = new List<AdapterList>();
             if (!(LoadingTextView is null))
             {
                 LoadingTextView.Visibility = ViewStates.Visible;
@@ -133,12 +181,24 @@ namespace SyteLine.Classes.Activities.Common
                 {
                     HasMoreRow = true;
                 }
+                UpdateAdapterLists(index);
             }
             catch (Exception Ex)
             {
                 Toast.MakeText(this, "ReadIDOs(int index) -> " + Ex.Message, ToastLength.Short).Show();
                 throw Ex;
             }
+        }
+
+        protected virtual string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        {
+            //called by UpdateAdapterLists;
+            return "";
+        }
+
+        protected virtual void UpdateAdapterLists(int index = 0)
+        {
+            ;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

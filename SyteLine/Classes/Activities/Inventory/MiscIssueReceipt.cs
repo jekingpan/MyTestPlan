@@ -15,7 +15,7 @@ namespace SyteLine.Classes.Activities.Inventory
 {
 
     [Activity(Label = "@string/MiscIssueReceipt")]
-    public class MiscIssueReceipt : BaseActivity
+    public class MiscIssueReceipt : CSIBaseActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

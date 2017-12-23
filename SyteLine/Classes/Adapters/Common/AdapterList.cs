@@ -10,46 +10,90 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
+using static SyteLine.Classes.Adapters.Common.AdapterListItem;
 
 namespace SyteLine.Classes.Adapters.Common
 {
     public class AdapterList
     {
-        private Dictionary<string, object> ObjectList = new Dictionary<string, object>();
-        private Dictionary<string, string> LableList = new Dictionary<string, string>();
+        public string KeyName;
+        //private Dictionary<string, AdapterListItem> objectList = new Dictionary<string, AdapterListItem>();
 
-        public AdapterList(string Name)
-        {
-            Add("AdapterListID", Name); //Used for specific object - Label Value Pait List this is added for default key to identity the AdapterList.
-        }
-
-        public AdapterList(string Name, object Value, string Label)
-        {
-            Add("AdapterListID", Name); //Used for specific object - Label Value Pait List this is added for default key to identity the AdapterList.
-            Add(Name, Value, Label); //Used for specific object - Label Value Pait List this is added for default key to identity the AdapterList.
-        }
+        public Dictionary<string, AdapterListItem> ObjectList { get; private set; }
 
         public AdapterList()
         {
-            Add("AdapterListID", ""); //User for Name Value Pair list.
+            ObjectList = new Dictionary<string, AdapterListItem>();
         }
 
-        public void Add(string name, object value)
+        public AdapterList(string name, ValueTypes vType = ValueTypes.String)
         {
-            Add(name, value, "");
+            ObjectList = new Dictionary<string, AdapterListItem>();
+            Add(name, name, vType);
         }
 
-        public void Add(string name, object value, string label)
+        public AdapterList(string name, object value, ValueTypes vType = ValueTypes.String)
         {
-            ObjectList.Add(name, value);
-            LableList.Add(name, label);
+            ObjectList = new Dictionary<string, AdapterListItem>();
+            Add(name, value, vType);
+        }
+
+        public AdapterList(string name, object value, string label, ValueTypes vType = ValueTypes.String, int layoutID = Resource.Layout.CommonLabelTextViewer, Type activity = null)
+        {
+            ObjectList = new Dictionary<string, AdapterListItem>();
+            Add(name, value, label, vType, layoutID, activity);
+        }
+
+        public AdapterList(string key, string name, object value, string label, ValueTypes vType = ValueTypes.String, int layoutID = Resource.Layout.CommonLabelTextViewer, Type activity = null)
+        {
+            ObjectList = new Dictionary<string, AdapterListItem>();
+            Add(key, name, value, label, vType, layoutID, activity);
+        }
+
+        public void Add(string name, ValueTypes vType = ValueTypes.String, Type activity = null)
+        {
+            Add(name, "", name, vType, activity);
+        }
+
+        public void Add(string name, object value, ValueTypes vType = ValueTypes.String, Type activity = null)
+        {
+            Add(name, value, name, vType, activity);
+        }
+
+        public void Add(string name, object value, string lable, ValueTypes vType = ValueTypes.String, Type activity = null)
+        {
+            Add(name, name, value, lable, vType, activity);
+        }
+
+        public void Add(string key, string name, object value, string lable, ValueTypes vType = ValueTypes.String, Type activity = null)
+        {
+            Add(key, name, value, lable, vType, Resource.Layout.CommonLabelTextViewer, activity);
+        }
+
+        public void Add(string name, object value, string lable, ValueTypes vType = ValueTypes.String, int layoutID = Resource.Layout.CommonLabelTextViewer, Type activity = null)
+        {
+            Add(name, name, value, lable, vType, layoutID, activity);
+        }
+
+        public void Add(string key, string name, object value, string label, ValueTypes vType = ValueTypes.String, int layoutID = Resource.Layout.CommonLabelTextViewer, Type activity = null)
+        {
+            ObjectList.Add(name,new AdapterListItem()
+            {
+                Key = key,
+                Name = name,
+                Value = value,
+                ValueType = vType,
+                Label = label,
+                LayoutID = layoutID,
+                ActivityType = activity
+            });
         }
 
         public string GetLabel(string name)
         {
             try
             {
-                return LableList.GetValueOrDefault(name);
+                return ObjectList.GetValueOrDefault(name).Label.Replace("{0}", GetString(name));
             }
             catch
             {
@@ -57,11 +101,23 @@ namespace SyteLine.Classes.Adapters.Common
             }
         }
 
-        public object GetObject(string name)
+        public string GetDisplayedValue(string name)
         {
             try
             {
-                return ObjectList.GetValueOrDefault(name);
+                return ObjectList.GetValueOrDefault(name).DisplayedValue;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object GetValue(string name)
+        {
+            try
+            {
+                return ObjectList.GetValueOrDefault(name).Value;
             }
             catch
             {
@@ -73,7 +129,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return (bool)GetObject(name);
+                return (bool)GetValue(name);
             }
             catch
             {
@@ -85,7 +141,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return (Decimal)GetObject(name);
+                return (Decimal)GetValue(name);
             }
             catch
             {
@@ -97,7 +153,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return (int)GetObject(name);
+                return (int)GetValue(name);
             }
             catch
             {
@@ -109,7 +165,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return (Bitmap)GetObject(name);
+                return (Bitmap)GetValue(name);
             }
             catch
             {
@@ -119,9 +175,11 @@ namespace SyteLine.Classes.Adapters.Common
 
         public string GetString(string name)
         {
+            string value = "";
             try
             {
-                return (string)GetObject(name);
+                value = GetDisplayedValue(name) == "" ? (string)GetValue(name) : GetDisplayedValue(name);
+                return value;
             }
             catch
             {
@@ -129,16 +187,84 @@ namespace SyteLine.Classes.Adapters.Common
             }
         }
 
-        public string GetKeyName()
+        public string GetName(string key)
         {
             try
             {
-                return (string)ObjectList.GetValueOrDefault("AdapterListID");
+                return (string)ObjectList.GetValueOrDefault(key).Name;
             }
             catch
             {
                 return "";
             }
         }
+
+        public int GetLayoutID(string name)
+        {
+            try
+            {
+                return ObjectList.GetValueOrDefault(name).LayoutID;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public Type GetActivityType(string name)
+        {
+            try
+            {
+                return ObjectList.GetValueOrDefault(name).ActivityType;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public string GetKey(int index)
+        {
+            try
+            {
+                return (string)ObjectList.Keys.ToArray()[index];
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public string GetFirstKey()
+        {
+            try
+            {
+                return (string)ObjectList.First().Key;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public ValueTypes GetValueType(string name)
+        {
+            return ObjectList.GetValueOrDefault(name).ValueType;
+        }
+    }
+
+    public class AdapterListItem
+    {
+        public string Key { set; get; }
+        public string Name { set; get; }
+        public string Label { set; get; }
+        public object Value { set; get; }
+        public string DisplayedValue { set; get; }
+        public int LayoutID { set; get; }
+        public bool Modified { set; get; }
+        public Type ActivityType { set; get; }
+        public ValueTypes ValueType { set; get; }
+
+        public enum ValueTypes { String, Int, Decimal, Date, DateTime, Boolean, Bitmap};
     }
 }

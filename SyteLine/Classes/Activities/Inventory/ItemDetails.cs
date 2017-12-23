@@ -10,11 +10,12 @@ using SyteLine.Classes.Activities.Common;
 using SyteLine.Classes.Adapters.Inventory;
 using SyteLine.Classes.Business.Inventory;
 using SyteLine.Classes.Adapters.Common;
+using static SyteLine.Classes.Adapters.Common.AdapterListItem;
 
 namespace SyteLine.Classes.Activities.Inventory
 {
     [Activity(Label = "@string/ItemDetails")]
-    public class ItemDetails : BaseDetailActivity
+    public class ItemDetails : CSIBaseDetailActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,91 +24,27 @@ namespace SyteLine.Classes.Activities.Inventory
             base.OnCreate(savedInstanceState);
         }
 
-        protected override void RegisterAdapter(bool Append)
-        {
-            List<AdapterList> Rows;
-            try
-            {
-                base.RegisterAdapter(Append);
-
-                IDOItems Items = (IDOItems)BaseObject;
-
-                SetKey(Items.GetItem());
-                SetKeyDescription(Items.GetDescription());
-                if (new Configure().LoadPicture)
-                {
-                    SetImageView(Items.GetPicture());
-                }
-
-                Rows = new List<AdapterList>();
-                for (int i = 0; i < Items.GetRowCount(); i++)
-                {
-                    Rows.Add(new AdapterList("-", "", GetString(Resource.String.General)));
-                    Rows.Add(new AdapterList("DerQtyOnHand", Items.GetQtyOnHand(i), GetString(Resource.String.OnHandQuantity)));
-                    Rows.Add(new AdapterList("UM", Items.GetUM(i), GetString(Resource.String.UnitofMeasure)));
-                    Rows.Add(new AdapterList("MatlType", Items.GetMatlType(i), GetString(Resource.String.MaterialType)));
-                    Rows.Add(new AdapterList("PMTCode", Items.GetPMTCode(i), GetString(Resource.String.MaterialType)));
-                    Rows.Add(new AdapterList("ProductCode", Items.GetProductCode(i), GetString(Resource.String.ProductCode)));
-                    Rows.Add(new AdapterList("LotTracked", Items.GetLotTracked(i), GetString(Resource.String.LotTracked)));
-                    Rows.Add(new AdapterList("SerialTracked", Items.GetSerialTracked(i), GetString(Resource.String.SNTracked)));
-
-                    if (!string.IsNullOrEmpty(Items.GetOverview(i)))
-                    {
-                        Rows.Add(new AdapterList("--", "", GetString(Resource.String.Overview)));
-                        Rows.Add(new AdapterList("Overview", Items.GetOverview(i), ""));
-                    }
-                }
-
-                string whse = "";
-                IDOItemLocs itemLoc = (IDOItemLocs)SencondObjects[1];
-                for (int i = 0; i < itemLoc.GetRowCount(); i++)
-                {
-                    if (whse != itemLoc.GetWhse(i))
-                    {
-                        if (!string.IsNullOrEmpty(itemLoc.GetWhsName(i)))
-                        {
-                            Rows.Add(new AdapterList("-", "", string.Format("{0}\r\n{1}", itemLoc.GetWhse(i), itemLoc.GetWhsName(i))));
-                        }
-                        else
-                        {
-                            Rows.Add(new AdapterList("-", "", itemLoc.GetWhse(i)));
-                        }
-                        Rows.Add(new AdapterList("ItmwhseQtyOnHand", itemLoc.GetItmwhseQtyOnHand(i), GetString(Resource.String.ItmwhseQtyOnHand)));
-                        whse = itemLoc.GetWhse(i);
-                    }
-                    if (!string.IsNullOrEmpty(itemLoc.GetLocDescription(i)))
-                    {
-                        Rows.Add(new AdapterList("--", "", string.Format("{0}\r\n{1}", itemLoc.GetLoc(i), itemLoc.GetLocDescription(i))));
-                    }
-                    else
-                    {
-                        Rows.Add(new AdapterList("--", "", itemLoc.GetLoc(i)));
-                    }
-                    Rows.Add(new AdapterList("LocType", itemLoc.GetLocType(i), GetString(Resource.String.LocType)));
-                    Rows.Add(new AdapterList("Rank", itemLoc.GetRank(i), GetString(Resource.String.Rank)));
-                    Rows.Add(new AdapterList("ItmIssueBy", itemLoc.GetItmIssueBy(i), GetString(Resource.String.ItmIssueBy)));
-                    Rows.Add(new AdapterList("QtyOnHand", itemLoc.GetQtyOnHand(i), GetString(Resource.String.QtyOnHand)));
-                    Rows.Add(new AdapterList("QtyRsvd", itemLoc.GetQtyRsvd(i), GetString(Resource.String.QtyRsvd)));
-                }
-                ListView.Adapter = new ItemDetailsAdapter(this, Rows);
-
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-        }
-
         protected override void PrepareIDOs()
         {
             base.PrepareIDOs();
             try
             {
                 IDOItems Items = (IDOItems)BaseObject;
-                Items.parm.PropertyList = "Item,Description,Overview,DerQtyOnHand,UM,MatlType,PMTCode,ProductCode,LotTracked,SerialTracked";//,Picture
+                Items.parm.PropertyList = "Item,Description";//,Overview,DerQtyOnHand,UM,MatlType,PMTCode,ProductCode,LotTracked,SerialTracked";
+                SetAdapterLists(0, "-", "", ValueTypes.String, GetString(Resource.String.General), Resource.Layout.CommonSplitterViewer);
+                SetAdapterLists(0, "DerQtyOnHand", "DerQtyOnHand", ValueTypes.Decimal, GetString(Resource.String.OnHandQuantity));
+                SetAdapterLists(0, "UM", "UM", ValueTypes.String, GetString(Resource.String.UnitofMeasure));
+                SetAdapterLists(0, "MatlType", "MatlType", ValueTypes.String, GetString(Resource.String.MaterialType));
+                SetAdapterLists(0, "PMTCode", "PMTCode", ValueTypes.String, GetString(Resource.String.MaterialType));
+                SetAdapterLists(0, "ProductCode", "ProductCode", ValueTypes.String, GetString(Resource.String.ProductCode));
+                SetAdapterLists(0, "LotTracked", "LotTracked", ValueTypes.Boolean, GetString(Resource.String.LotTracked), Resource.Layout.CommonLabelSwitchViewer);
+                SetAdapterLists(0, "SerialTracked", "SerialTracked", ValueTypes.Boolean, GetString(Resource.String.SNTracked), Resource.Layout.CommonLabelSwitchViewer);
+                SetAdapterLists(0, "Overview", "Overview", ValueTypes.String, GetString(Resource.String.Overview), Resource.Layout.CommonLabelMultiLinesTextViewer);
+                Items.SetOrderBy("Item");
+
                 if (new Configure().LoadPicture)
                 {
-                    BaseObject.parm.PropertyList += ",Picture";
+                    SetAdapterLists(0, "Picture", "Picture", ValueTypes.Bitmap, "");
                 }
                 Items.BuilderFilterByItem(Intent.GetStringExtra("Item"));
             }
@@ -125,6 +62,18 @@ namespace SyteLine.Classes.Activities.Inventory
                 if (index == 1)
                 {
                     IDOItemLocs itemLoc = (IDOItemLocs)GetSecondObject(index);
+                    itemLoc.parm.PropertyList = "";
+                    SetAdapterLists(index, "Whse", "Whse", ValueTypes.String, GetString(Resource.String.Warehouse) + " - {0}", Resource.Layout.CommonSplitterViewer);
+                    SetAdapterLists(index, "WhsName", "WhsName", ValueTypes.String, GetString(Resource.String.WarehouseName));
+                    SetAdapterLists(index, "ItmwhseQtyOnHand", "ItmwhseQtyOnHand", ValueTypes.Decimal, GetString(Resource.String.ItmwhseQtyOnHand));
+                    SetAdapterLists(index, "Loc", "Loc", ValueTypes.String, GetString(Resource.String.Location) + " - {0}", Resource.Layout.CommonSplitterSmallViewer);
+                    SetAdapterLists(index, "LocDescription", "LocDescription", ValueTypes.String, GetString(Resource.String.LocDescription)); 
+                    SetAdapterLists(index, "LocType", "LocType", ValueTypes.String, GetString(Resource.String.LocType)); 
+                    SetAdapterLists(index, "Rank", "Rank", ValueTypes.String, GetString(Resource.String.Rank));
+                    SetAdapterLists(index, "ItmIssueBy", "ItmIssueBy", ValueTypes.String, GetString(Resource.String.ItmIssueBy));
+                    SetAdapterLists(index, "QtyOnHand", "QtyOnHand", ValueTypes.Decimal, GetString(Resource.String.QtyOnHand));
+                    SetAdapterLists(index, "QtyRsvd", "QtyRsvd", ValueTypes.Decimal, GetString(Resource.String.QtyRsvd));
+
                     itemLoc.BuilderFilterByItem(Intent.GetStringExtra("Item"));
                     itemLoc.BuilderAdditionalFilter("QtyOnHand <> 0");
                     itemLoc.parm.RecordCap = -1;
@@ -135,6 +84,49 @@ namespace SyteLine.Classes.Activities.Inventory
             {
                 throw Ex;
             }
+        }
+
+        protected override void RegisterAdapter(bool Append)
+        {
+            try
+            {
+                base.RegisterAdapter(Append);
+
+                IDOItems Items = (IDOItems)BaseObject;
+
+                SetKey(Items.GetItem());
+                SetKeyDescription(Items.GetDescription());
+                if (new Configure().LoadPicture)
+                {
+                    SetImageView(Items.GetPicture());
+                }
+                
+                ListView.Adapter = new ItemDetailsAdapter(this, AdapterLists);
+
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
+        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        {
+            string value = "";
+            switch (objIndex)
+            {
+                case 0:
+                    IDOItems Items = (IDOItems)BaseObject;
+                    value = Items.GetPropertyDisplayedValue(name, row);
+                    break;
+                case 1:
+                    IDOItemLocs itemLoc = (IDOItemLocs)GetSecondObject(objIndex);
+                    value = itemLoc.GetPropertyDisplayedValue(name, row);
+                    break;
+                default:
+                    break;
+            }
+            return value;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

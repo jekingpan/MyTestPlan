@@ -50,7 +50,7 @@ namespace SyteLine.Classes.Business.Purchase
 
         public string GetStat(int index = 0, int rtnCode = 0)
         {
-            string value = GetPropertyValue("Type", index);
+            string value = GetPropertyValue("Stat", index);
             if (rtnCode == 1 || context is null)
             {
                 return value;
@@ -243,6 +243,35 @@ namespace SyteLine.Classes.Business.Purchase
         public string GetDerShipToAddr(int index = 0)
         {
             return GetPropertyValue("DerShipToAddr", index);
+        }
+
+        public override string GetPropertyDisplayedValue(string Name, int Row)
+        {
+            string value = "";
+            switch (Name)
+            {
+                case "PoStat":
+                    value = GetPoStat(Row);
+                    break;
+                case "Stat":
+                    value = GetStat(Row);
+                    break;
+                case "PromiseDate":
+                    value = GetPromiseDate(Row);
+                    break;
+                case "DueDate":
+                    value = GetDueDate(Row);
+                    break;
+                case "PoOrderDate":
+                    value = GetPoOrderDate(Row);
+                    break;
+                case "QtyOrderedConv":
+                    value = GetQtyOrderedConv(Row);
+                    break;
+                default:
+                    break;
+            }
+            return value;
         }
     }
 }

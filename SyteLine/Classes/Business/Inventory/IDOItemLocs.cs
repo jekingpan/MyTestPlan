@@ -157,5 +157,34 @@ namespace SyteLine.Classes.Business.Inventory
         {
             return string.Format(Format, GetPropertyDecimalValue("DerIWhseTotalNonNetStock", index));
         }
+
+        public override string GetPropertyDisplayedValue(string Name, int Row)
+        {
+            string value = "";
+            switch (Name)
+            {
+                case "ItmIssueBy":
+                    value = GetItmIssueBy(Row);
+                    break;
+                case "LocType":
+                    value = GetLocType(Row);
+                    break;
+                case "QtyOnHand":
+                    value = GetQtyOnHand(Row);
+                    break;
+                case "ItmwhseQtyOnHand":
+                    value = GetItmwhseQtyOnHand(Row);
+                    break;
+                case "QtyRsvd":
+                    value = GetQtyRsvd(Row);
+                    break;
+                case "DerIWhseTotalRsvdCO":
+                    value = GetWhseTotalRsvdCO(Row);
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }
     }
 }

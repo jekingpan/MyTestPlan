@@ -14,7 +14,7 @@ using SyteLine.Classes.Activities.Common;
 namespace SyteLine.Classes.Activities.Admin
 {
     [Activity(Label = "@string/Welcome")]
-    public class Main : BaseActivity
+    public class Main : CSIBaseActivity
     {
         private DateTime? LastBackKeyDownTime;
         private ListView CommandListView;

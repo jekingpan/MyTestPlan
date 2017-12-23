@@ -143,5 +143,28 @@ namespace SyteLine.Classes.Business.Inventory
         {
             return string.Format(Format, GetPropertyDecimalValue("DerQtyAvailable", index));
         }
+
+        public override string GetPropertyDisplayedValue(string Name, int Row)
+        {
+            string value = "";
+            switch (Name)
+            {
+                case "MatlType":
+                    value = GetMatlType(Row);
+                    break;
+                case "PMTCode":
+                    value = GetPMTCode(Row);
+                    break;
+                case "DerQtyOnHand":
+                    value = GetQtyOnHand(Row);
+                    break;
+                case "DerQtyAvailable":
+                    value = GetQtyAvailable(Row);
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }
     }
 }
