@@ -475,6 +475,9 @@ namespace SyteLine
 			// aapt resource value: 0x7f05000b
 			public const int EnableHTTPS = 2131034123;
 			
+			// aapt resource value: 0x7f050071
+			public const int Error = 2131034225;
+			
 			// aapt resource value: 0x7f05004d
 			public const int ExpirationDate = 2131034189;
 			
@@ -600,6 +603,9 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05000a
 			public const int Password = 2131034122;
+			
+			// aapt resource value: 0x7f050072
+			public const int Pending = 2131034226;
 			
 			// aapt resource value: 0x7f050058
 			public const int Plan = 2131034200;
@@ -738,6 +744,9 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f050020
 			public const int UnitofMeasure = 2131034144;
+			
+			// aapt resource value: 0x7f050073
+			public const int Unposted = 2131034227;
 			
 			// aapt resource value: 0x7f05000e
 			public const int UseRESTForRequest = 2131034126;

@@ -87,6 +87,7 @@
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
+    <Compile Include="Classes\Business\Inventory\IDODcmoves.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrderLines.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrders.cs" />
     <Compile Include="Classes\Adapters\Inventory\ItemLocDetailsAdapter.cs" />
@@ -99,8 +100,12 @@
     <Compile Include="Classes\Business\Inventory\IDOItems.cs" />
     <Compile Include="Classes\Adapters\Common\ListViewerAdapter.cs" />
     <Compile Include="Classes\Adapters\Common\GridViewerAdapter.cs" />
+    <Compile Include="Classes\Core\Common\BaseIDO.cs" />
     <Compile Include="Classes\Core\Common\Configure.cs" />
     <Compile Include="Classes\Core\Common\BaseBusinessObject.cs" />
+    <Compile Include="Classes\Core\Common\CSIJson.cs" />
+    <Compile Include="Classes\Core\Common\CSIJsonREST.cs" />
+    <Compile Include="Classes\Core\Common\CSIJsonSOAP.cs" />
     <Compile Include="Classes\Core\CSIWebServices\IDORESTService.cs" />
     <Compile Include="Classes\Core\CSIWebServices\SOAPParameters.cs" />
     <Compile Include="Classes\Core\CSIWebServices\GetObjectsBySOAPREST.cs" />

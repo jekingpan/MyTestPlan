@@ -113,4 +113,7 @@
   <string name="DueDate">Due Date</string>
   <string name="WarehouseName">WarehouseName</string>
   <string name="LocDescription">LocDescription</string>
+  <string name="Error">Error</string>
+  <string name="Pending">Pending</string>
+  <string name="Unposted">Unposted</string>
 </resources>

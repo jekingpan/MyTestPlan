@@ -113,4 +113,7 @@
   <string name="DueDate">到期日</string>
   <string name="WarehouseName">仓库名称</string>
   <string name="LocDescription">货位描述</string>
+  <string name="Error">出错</string>
+  <string name="Pending">待定</string>
+  <string name="Unposted">未过账</string>
 </resources>
