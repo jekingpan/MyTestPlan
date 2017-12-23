@@ -8,14 +8,14 @@ using static Android.Widget.AdapterView;
 
 namespace SyteLine.Classes.Adapters.Common
 {
-    public class GridViewAdapter : BaseAdapter
+    public class CSIBaseGridViewerAdapter : BaseAdapter
     {
         private Activity context;
         private GridView parentView;
         // references to our images
         public List<GridViewActionItem> ActionItems = new List<GridViewActionItem>();
 
-        public GridViewAdapter(Activity c,GridView gridView)
+        public CSIBaseGridViewerAdapter(Activity c,GridView gridView)
             : base()
         {
             parentView = gridView;

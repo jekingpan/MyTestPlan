@@ -26,12 +26,12 @@ namespace SyteLine.Classes.Adapters.Common
         public Type ActivityType { get; set; }
     }
 
-    public class ListViewerAdapter : BaseAdapter<ListViewerAdapterItem>
+    public class CSIBaseListViewerAdapter : BaseAdapter<ListViewerAdapterItem>
     {
         private List<ListViewerAdapterItem> items;
         private Activity context;
 
-        public ListViewerAdapter(Activity context, List<ListViewerAdapterItem> items)
+        public CSIBaseListViewerAdapter(Activity context, List<ListViewerAdapterItem> items)
             : base()
         {
             this.context = context;

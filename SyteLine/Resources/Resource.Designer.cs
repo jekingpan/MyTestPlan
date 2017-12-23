@@ -102,56 +102,65 @@ namespace SyteLine
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070010
-			public const int ActionText = 2131165200;
+			// aapt resource value: 0x7f070015
+			public const int ActionText = 2131165205;
+			
+			// aapt resource value: 0x7f070036
+			public const int CSIWebServerEdit = 2131165238;
+			
+			// aapt resource value: 0x7f070035
+			public const int CSIWebServerLabel = 2131165237;
+			
+			// aapt resource value: 0x7f070026
+			public const int ConfigurationEdit = 2131165222;
+			
+			// aapt resource value: 0x7f070025
+			public const int ConfigurationLabel = 2131165221;
 			
 			// aapt resource value: 0x7f070031
-			public const int CSIWebServerEdit = 2131165233;
+			public const int DateEdit = 2131165233;
 			
-			// aapt resource value: 0x7f070030
-			public const int CSIWebServerLabel = 2131165232;
+			// aapt resource value: 0x7f070018
+			public const int DescriptionEdit = 2131165208;
 			
-			// aapt resource value: 0x7f070021
-			public const int ConfigurationEdit = 2131165217;
+			// aapt resource value: 0x7f070006
+			public const int Edit1Text = 2131165190;
 			
-			// aapt resource value: 0x7f070020
-			public const int ConfigurationLabel = 2131165216;
+			// aapt resource value: 0x7f070007
+			public const int Edit2Text = 2131165191;
 			
-			// aapt resource value: 0x7f07002c
-			public const int DateEdit = 2131165228;
-			
-			// aapt resource value: 0x7f070013
-			public const int DescriptionEdit = 2131165203;
+			// aapt resource value: 0x7f070005
+			public const int EditLinearLayout = 2131165189;
 			
 			// aapt resource value: 0x7f070002
 			public const int EditText = 2131165186;
 			
-			// aapt resource value: 0x7f070037
-			public const int EnableHTTPSEdit = 2131165239;
+			// aapt resource value: 0x7f07003c
+			public const int EnableHTTPSEdit = 2131165244;
 			
-			// aapt resource value: 0x7f070026
-			public const int ErrorInformationLabel = 2131165222;
-			
-			// aapt resource value: 0x7f070003
-			public const int GridView = 2131165187;
-			
-			// aapt resource value: 0x7f07000f
-			public const int ImageTextLayout = 2131165199;
-			
-			// aapt resource value: 0x7f070005
-			public const int ImageView = 2131165189;
-			
-			// aapt resource value: 0x7f070012
-			public const int ItemEdit = 2131165202;
-			
-			// aapt resource value: 0x7f070011
-			public const int ItemImage = 2131165201;
+			// aapt resource value: 0x7f07002b
+			public const int ErrorInformationLabel = 2131165227;
 			
 			// aapt resource value: 0x7f070008
-			public const int KeyDescriptionEdit = 2131165192;
+			public const int GridView = 2131165192;
 			
-			// aapt resource value: 0x7f070007
-			public const int KeyEdit = 2131165191;
+			// aapt resource value: 0x7f070014
+			public const int ImageTextLayout = 2131165204;
+			
+			// aapt resource value: 0x7f07000a
+			public const int ImageView = 2131165194;
+			
+			// aapt resource value: 0x7f070017
+			public const int ItemEdit = 2131165207;
+			
+			// aapt resource value: 0x7f070016
+			public const int ItemImage = 2131165206;
+			
+			// aapt resource value: 0x7f07000d
+			public const int KeyDescriptionEdit = 2131165197;
+			
+			// aapt resource value: 0x7f07000c
+			public const int KeyEdit = 2131165196;
 			
 			// aapt resource value: 0x7f070001
 			public const int Label = 2131165185;
@@ -159,155 +168,161 @@ namespace SyteLine
 			// aapt resource value: 0x7f070000
 			public const int LinearLayout = 2131165184;
 			
-			// aapt resource value: 0x7f07000b
-			public const int ListView = 2131165195;
-			
-			// aapt resource value: 0x7f070039
-			public const int LoadPictureEdit = 2131165241;
-			
-			// aapt resource value: 0x7f07000e
-			public const int LoadingTextView = 2131165198;
-			
-			// aapt resource value: 0x7f070022
-			public const int LoginButton = 2131165218;
-			
-			// aapt resource value: 0x7f07001b
-			public const int LogoView = 2131165211;
-			
-			// aapt resource value: 0x7f070015
-			public const int LotLabel = 2131165205;
-			
-			// aapt resource value: 0x7f070016
-			public const int LotTrackedImageView = 2131165206;
-			
-			// aapt resource value: 0x7f070040
-			public const int Menu_CurrentConfiguration = 2131165248;
-			
-			// aapt resource value: 0x7f070042
-			public const int Menu_GetMoreRows = 2131165250;
+			// aapt resource value: 0x7f070010
+			public const int ListView = 2131165200;
 			
 			// aapt resource value: 0x7f07003e
-			public const int Menu_OffLine = 2131165246;
+			public const int LoadPictureEdit = 2131165246;
 			
-			// aapt resource value: 0x7f07003d
-			public const int Menu_Refresh = 2131165245;
-			
-			// aapt resource value: 0x7f070044
-			public const int Menu_Save = 2131165252;
-			
-			// aapt resource value: 0x7f070041
-			public const int Menu_Search = 2131165249;
-			
-			// aapt resource value: 0x7f07003c
-			public const int Menu_Settings = 2131165244;
-			
-			// aapt resource value: 0x7f07003f
-			public const int Menu_SignOut = 2131165247;
-			
-			// aapt resource value: 0x7f070043
-			public const int Menu_Test = 2131165251;
-			
-			// aapt resource value: 0x7f070035
-			public const int NumberPerPageLabel = 2131165237;
-			
-			// aapt resource value: 0x7f070032
-			public const int NumberPerPageLinearLayout = 2131165234;
-			
-			// aapt resource value: 0x7f070019
-			public const int OnHandQuantityEdit = 2131165209;
-			
-			// aapt resource value: 0x7f070028
-			public const int PONumrEdit = 2131165224;
-			
-			// aapt resource value: 0x7f07001f
-			public const int PasswordEdit = 2131165215;
-			
-			// aapt resource value: 0x7f07001e
-			public const int PasswordLabel = 2131165214;
-			
-			// aapt resource value: 0x7f07003b
-			public const int PasswordLinearLayout = 2131165243;
+			// aapt resource value: 0x7f070013
+			public const int LoadingTextView = 2131165203;
 			
 			// aapt resource value: 0x7f070027
-			public const int PurchaseOrderLinearLayout = 2131165223;
+			public const int LoginButton = 2131165223;
 			
-			// aapt resource value: 0x7f070036
-			public const int RecordCapEdit = 2131165238;
-			
-			// aapt resource value: 0x7f070017
-			public const int SNLabel = 2131165207;
-			
-			// aapt resource value: 0x7f070018
-			public const int SNTrackedImageView = 2131165208;
-			
-			// aapt resource value: 0x7f070034
-			public const int SaveButton = 2131165236;
-			
-			// aapt resource value: 0x7f070024
-			public const int SavePasswordSwitch = 2131165220;
-			
-			// aapt resource value: 0x7f070023
-			public const int SaveUserSwitch = 2131165219;
-			
-			// aapt resource value: 0x7f070025
-			public const int SettingsButton = 2131165221;
-			
-			// aapt resource value: 0x7f07002e
-			public const int StatEdit = 2131165230;
-			
-			// aapt resource value: 0x7f07000a
-			public const int SubKeyDescriptionEdit = 2131165194;
-			
-			// aapt resource value: 0x7f070009
-			public const int SubKeyEdit = 2131165193;
-			
-			// aapt resource value: 0x7f07000d
-			public const int Switch = 2131165197;
-			
-			// aapt resource value: 0x7f070033
-			public const int TestButton = 2131165235;
-			
-			// aapt resource value: 0x7f07000c
-			public const int Text = 2131165196;
-			
-			// aapt resource value: 0x7f07002d
-			public const int TypeEdit = 2131165229;
+			// aapt resource value: 0x7f070020
+			public const int LogoView = 2131165216;
 			
 			// aapt resource value: 0x7f07001a
-			public const int UnitofMeasureEdit = 2131165210;
+			public const int LotLabel = 2131165210;
 			
-			// aapt resource value: 0x7f070038
-			public const int UseRESTForRequestEdit = 2131165240;
+			// aapt resource value: 0x7f07001b
+			public const int LotTrackedImageView = 2131165211;
 			
-			// aapt resource value: 0x7f07001d
-			public const int UserEdit = 2131165213;
+			// aapt resource value: 0x7f070045
+			public const int Menu_CurrentConfiguration = 2131165253;
 			
-			// aapt resource value: 0x7f07001c
-			public const int UserLabel = 2131165212;
+			// aapt resource value: 0x7f070047
+			public const int Menu_GetMoreRows = 2131165255;
+			
+			// aapt resource value: 0x7f070043
+			public const int Menu_OffLine = 2131165251;
+			
+			// aapt resource value: 0x7f070042
+			public const int Menu_Refresh = 2131165250;
+			
+			// aapt resource value: 0x7f070049
+			public const int Menu_Save = 2131165257;
+			
+			// aapt resource value: 0x7f070046
+			public const int Menu_Search = 2131165254;
+			
+			// aapt resource value: 0x7f070041
+			public const int Menu_Settings = 2131165249;
+			
+			// aapt resource value: 0x7f070044
+			public const int Menu_SignOut = 2131165252;
+			
+			// aapt resource value: 0x7f070048
+			public const int Menu_Test = 2131165256;
 			
 			// aapt resource value: 0x7f07003a
-			public const int UserLinearLayout = 2131165242;
+			public const int NumberPerPageLabel = 2131165242;
 			
-			// aapt resource value: 0x7f07002a
-			public const int VendNumEdit = 2131165226;
+			// aapt resource value: 0x7f070037
+			public const int NumberPerPageLinearLayout = 2131165239;
 			
-			// aapt resource value: 0x7f070029
-			public const int VendorLinearLayout = 2131165225;
+			// aapt resource value: 0x7f07001e
+			public const int OnHandQuantityEdit = 2131165214;
 			
-			// aapt resource value: 0x7f07002b
-			public const int VendorNameEdit = 2131165227;
+			// aapt resource value: 0x7f07002d
+			public const int PONumrEdit = 2131165229;
 			
-			// aapt resource value: 0x7f07002f
-			public const int WhseEdit = 2131165231;
+			// aapt resource value: 0x7f070024
+			public const int PasswordEdit = 2131165220;
+			
+			// aapt resource value: 0x7f070023
+			public const int PasswordLabel = 2131165219;
+			
+			// aapt resource value: 0x7f070040
+			public const int PasswordLinearLayout = 2131165248;
+			
+			// aapt resource value: 0x7f07002c
+			public const int PurchaseOrderLinearLayout = 2131165228;
+			
+			// aapt resource value: 0x7f07003b
+			public const int RecordCapEdit = 2131165243;
 			
 			// aapt resource value: 0x7f070004
-			public const int linearLayout1 = 2131165188;
+			public const int RefNumLabel = 2131165188;
 			
-			// aapt resource value: 0x7f070006
-			public const int linearLayout3 = 2131165190;
+			// aapt resource value: 0x7f07001c
+			public const int SNLabel = 2131165212;
 			
-			// aapt resource value: 0x7f070014
-			public const int linearLayout6 = 2131165204;
+			// aapt resource value: 0x7f07001d
+			public const int SNTrackedImageView = 2131165213;
+			
+			// aapt resource value: 0x7f070039
+			public const int SaveButton = 2131165241;
+			
+			// aapt resource value: 0x7f070029
+			public const int SavePasswordSwitch = 2131165225;
+			
+			// aapt resource value: 0x7f070028
+			public const int SaveUserSwitch = 2131165224;
+			
+			// aapt resource value: 0x7f07002a
+			public const int SettingsButton = 2131165226;
+			
+			// aapt resource value: 0x7f070033
+			public const int StatEdit = 2131165235;
+			
+			// aapt resource value: 0x7f07000f
+			public const int SubKeyDescriptionEdit = 2131165199;
+			
+			// aapt resource value: 0x7f07000e
+			public const int SubKeyEdit = 2131165198;
+			
+			// aapt resource value: 0x7f070012
+			public const int Switch = 2131165202;
+			
+			// aapt resource value: 0x7f070038
+			public const int TestButton = 2131165240;
+			
+			// aapt resource value: 0x7f070011
+			public const int Text = 2131165201;
+			
+			// aapt resource value: 0x7f070003
+			public const int TextLinearLayout = 2131165187;
+			
+			// aapt resource value: 0x7f070032
+			public const int TypeEdit = 2131165234;
+			
+			// aapt resource value: 0x7f07001f
+			public const int UnitofMeasureEdit = 2131165215;
+			
+			// aapt resource value: 0x7f07003d
+			public const int UseRESTForRequestEdit = 2131165245;
+			
+			// aapt resource value: 0x7f070022
+			public const int UserEdit = 2131165218;
+			
+			// aapt resource value: 0x7f070021
+			public const int UserLabel = 2131165217;
+			
+			// aapt resource value: 0x7f07003f
+			public const int UserLinearLayout = 2131165247;
+			
+			// aapt resource value: 0x7f07002f
+			public const int VendNumEdit = 2131165231;
+			
+			// aapt resource value: 0x7f07002e
+			public const int VendorLinearLayout = 2131165230;
+			
+			// aapt resource value: 0x7f070030
+			public const int VendorNameEdit = 2131165232;
+			
+			// aapt resource value: 0x7f070034
+			public const int WhseEdit = 2131165236;
+			
+			// aapt resource value: 0x7f070009
+			public const int linearLayout1 = 2131165193;
+			
+			// aapt resource value: 0x7f07000b
+			public const int linearLayout3 = 2131165195;
+			
+			// aapt resource value: 0x7f070019
+			public const int linearLayout6 = 2131165209;
 			
 			static Id()
 			{
@@ -326,52 +341,55 @@ namespace SyteLine
 			public const int CommonFloatingLabelEditViewer = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int CommonGridViewer = 2130968577;
+			public const int CommonFloatingLabelRefNumEditViewer = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public const int CommonHeadDetailsViewer = 2130968578;
+			public const int CommonGridViewer = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public const int CommonLabelEditViewer = 2130968579;
+			public const int CommonHeadDetailsViewer = 2130968579;
 			
 			// aapt resource value: 0x7f040004
-			public const int CommonLabelMultiLinesTextViewer = 2130968580;
+			public const int CommonLabelEditViewer = 2130968580;
 			
 			// aapt resource value: 0x7f040005
-			public const int CommonLabelSwitchViewer = 2130968581;
+			public const int CommonLabelMultiLinesTextViewer = 2130968581;
 			
 			// aapt resource value: 0x7f040006
-			public const int CommonLabelTextViewer = 2130968582;
+			public const int CommonLabelSwitchViewer = 2130968582;
 			
 			// aapt resource value: 0x7f040007
-			public const int CommonListViewer = 2130968583;
+			public const int CommonLabelTextViewer = 2130968583;
 			
 			// aapt resource value: 0x7f040008
-			public const int CommonSearchViewer = 2130968584;
+			public const int CommonListViewer = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int CommonSplitterSmallViewer = 2130968585;
+			public const int CommonSearchViewer = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int CommonSplitterViewer = 2130968586;
+			public const int CommonSplitterSmallViewer = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int ImageTextViewerGrid = 2130968587;
+			public const int CommonSplitterViewer = 2130968587;
 			
 			// aapt resource value: 0x7f04000c
-			public const int ImageTextViewerLarge = 2130968588;
+			public const int ImageTextViewerGrid = 2130968588;
 			
 			// aapt resource value: 0x7f04000d
-			public const int ItemListViewer = 2130968589;
+			public const int ImageTextViewerLarge = 2130968589;
 			
 			// aapt resource value: 0x7f04000e
-			public const int Login = 2130968590;
+			public const int ItemListViewer = 2130968590;
 			
 			// aapt resource value: 0x7f04000f
-			public const int PurchaseOrderListViewer = 2130968591;
+			public const int Login = 2130968591;
 			
 			// aapt resource value: 0x7f040010
-			public const int Settings = 2130968592;
+			public const int PurchaseOrderListViewer = 2130968592;
+			
+			// aapt resource value: 0x7f040011
+			public const int Settings = 2130968593;
 			
 			static Layout()
 			{
@@ -468,6 +486,9 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05006d
 			public const int Description = 2131034221;
+			
+			// aapt resource value: 0x7f050077
+			public const int DocumentNum = 2131034231;
 			
 			// aapt resource value: 0x7f05006e
 			public const int DueDate = 2131034222;
@@ -651,6 +672,15 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05001a
 			public const int RecordCap = 2131034138;
+			
+			// aapt resource value: 0x7f050075
+			public const int RefLine = 2131034229;
+			
+			// aapt resource value: 0x7f050074
+			public const int RefNum = 2131034228;
+			
+			// aapt resource value: 0x7f050076
+			public const int RefRel = 2131034230;
 			
 			// aapt resource value: 0x7f05001b
 			public const int Refresh = 2131034139;

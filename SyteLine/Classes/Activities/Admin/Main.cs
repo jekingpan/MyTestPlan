@@ -92,7 +92,7 @@ namespace SyteLine.Classes.Activities.Admin
                 }
             };
 
-            CommandListView.Adapter = new ListViewerAdapter(this, CommandList);
+            CommandListView.Adapter = new CSIBaseListViewerAdapter(this, CommandList);
 
         }
 

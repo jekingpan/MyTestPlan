@@ -60,7 +60,7 @@ namespace SyteLine.Classes.Adapters.Common
             Add(name, value, name, vType, activity);
         }
 
-        public void Add(string name, object value, string lable, ValueTypes vType = ValueTypes.String, Type activity = null)
+        public void Add(string name, object value, string lable, ValueTypes vType, Type activity)
         {
             Add(name, name, value, lable, vType, activity);
         }

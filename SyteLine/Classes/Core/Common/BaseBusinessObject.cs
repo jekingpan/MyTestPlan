@@ -6,6 +6,8 @@ using Android.Util;
 using System.IO;
 using Android.Graphics;
 using Android.Content;
+using static Android.Graphics.Bitmap;
+using Java.IO;
 
 namespace SyteLine.Classes.Core.Common
 {
@@ -16,9 +18,11 @@ namespace SyteLine.Classes.Core.Common
         private BaseIDOResult BaseResult;
         protected Context context;
         protected bool IsReading = false;
+        public int CurrentRow { get; set; }
 
         public BaseBusinessObject(SOAPParameters parm, Context con = null)
         {
+            CurrentRow = 0;
             context = con;
             configure = new Configure();
             DefaultParm();
@@ -27,6 +31,7 @@ namespace SyteLine.Classes.Core.Common
 
         public BaseBusinessObject(string Token, Context con = null)
         {
+            CurrentRow = 0;
             context = con;
             configure = new Configure();
             parm = new SOAPParameters
@@ -74,7 +79,7 @@ namespace SyteLine.Classes.Core.Common
 
         public string GetPropertyValue(string Name)
         {
-            return GetPropertyValue(Name, 0);
+            return GetPropertyValue(Name, CurrentRow);
         }
 
         public int GetRowCount()
@@ -90,7 +95,7 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
-                return GetPropertyBitmap(Name, 0);
+                return GetPropertyBitmap(Name, CurrentRow);
             }
             catch(Exception Ex)
             {
@@ -121,7 +126,7 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
-                return Convert.ToDecimal(GetPropertyValue(Name, 0));
+                return Convert.ToDecimal(GetPropertyValue(Name, CurrentRow));
             }catch (Exception Ex)
             {
                 return 0;
@@ -146,7 +151,7 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
-                return int.Parse(GetPropertyValue(Name, 0));
+                return int.Parse(GetPropertyValue(Name, CurrentRow));
             }
             catch (Exception Ex)
             {
@@ -172,7 +177,7 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
-                return bool.Parse(GetPropertyValue(Name, 0));
+                return bool.Parse(GetPropertyValue(Name, CurrentRow));
             }
             catch (Exception Ex)
             {
@@ -259,6 +264,47 @@ namespace SyteLine.Classes.Core.Common
                 parm.Url = configure.UpdateUrl();
                 GetObjectsBySOAPREST.CallREST(ref parm);
                 BaseResult = new CSIJsonREST().PasreJson(parm.OutPutJsonString);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
+        public void New()
+        {
+            BaseResult.InsertRow();
+        }
+
+        public void Delete(int Row)
+        {
+            BaseResult.DeleteRow(Row);
+        }
+
+        public void SetPropertyValue(string Name, string Value)
+        {
+            BaseResult.SetPropertyValue(Name, CurrentRow, Value);
+        }
+
+        public void SetPropertyValue(string Name, int Row, string Value)
+        {
+            BaseResult.SetPropertyValue(Name, Row, Value);
+        }
+
+        public void SetPropertyBitmap(string Name, Bitmap Pic)
+        {
+            SetPropertyBitmap(Name, CurrentRow, Pic);
+        }
+
+        public void SetPropertyBitmap(string Name, int Row, Bitmap Pic)
+        {
+            try
+            {
+                MemoryStream output = new MemoryStream();
+                Pic.Compress(CompressFormat.Jpeg, 100, output);
+                byte[] PictureBytes = output.ToArray();
+                string PictureBase64 = System.Convert.ToBase64String(PictureBytes);
+                SetPropertyValue(Name, Row, PictureBase64);
             }
             catch (Exception Ex)
             {

@@ -73,8 +73,10 @@
     <Compile Include="Classes\Activities\Admin\Login.cs" />
     <Compile Include="Classes\Activities\Admin\Settings.cs" />
     <Compile Include="Classes\Activities\Common\CSIBaseActivity.cs" />
+    <Compile Include="Classes\Activities\Common\CSIBaseProcessActivity.cs" />
     <Compile Include="Classes\Activities\Common\CSIBaseDetailActivity.cs" />
     <Compile Include="Classes\Activities\Common\CSIBaseSearchActivity.cs" />
+    <Compile Include="Classes\Activities\Inventory\QuantityMove.cs" />
     <Compile Include="Classes\Activities\Inventory\MiscIssueReceipt.cs" />
     <Compile Include="Classes\Activities\Inventory\Items.cs" />
     <Compile Include="Classes\Activities\Inventory\ItemDetails.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Classes\Adapters\Common\AdapterList.cs" />
     <Compile Include="Classes\Adapters\Common\CSIBaseAdapter.cs" />
     <Compile Include="Classes\Adapters\Common\CSIBaseDetailsAdapter.cs" />
+    <Compile Include="Classes\Adapters\Inventory\QuantityMoveAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
@@ -98,9 +101,9 @@
     <Compile Include="Classes\Activities\Shopfloor\Shopfloor.cs" />
     <Compile Include="Classes\Business\Admin\IDOUsers.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItems.cs" />
-    <Compile Include="Classes\Adapters\Common\ListViewerAdapter.cs" />
-    <Compile Include="Classes\Adapters\Common\GridViewerAdapter.cs" />
-    <Compile Include="Classes\Core\Common\BaseIDO.cs" />
+    <Compile Include="Classes\Adapters\Common\CSIBaseListViewerAdapter.cs" />
+    <Compile Include="Classes\Adapters\Common\CSIBaseGridViewerAdapter.cs" />
+    <Compile Include="Classes\Core\Common\BaseIDOResult.cs" />
     <Compile Include="Classes\Core\Common\Configure.cs" />
     <Compile Include="Classes\Core\Common\BaseBusinessObject.cs" />
     <Compile Include="Classes\Core\Common\CSIJson.cs" />
@@ -173,6 +176,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonSplitterViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonFloatingLabelRefNumEditViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\IDOWebService\IDOWebService.wsdl" />

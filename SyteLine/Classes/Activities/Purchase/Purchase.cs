@@ -25,7 +25,7 @@ namespace SyteLine.Classes.Activities.Purchase
 
             try
             {
-                GridViewAdapter GridAdapter = new GridViewAdapter(this, GridView);
+                CSIBaseGridViewerAdapter GridAdapter = new CSIBaseGridViewerAdapter(this, GridView);
                 GridAdapter.ActionItems.Add(new GridViewActionItem()
                 {
                     ThumbId = Resource.Drawable.report,

@@ -50,7 +50,7 @@
   <string name="MiscReceive">其它接收</string>
   <string name="MiscIssue">其它发出</string>
   <string name="MiscIssueReceipt">其它收/发</string>
-  <string name="QuantityMove">移动货位</string>
+  <string name="QuantityMove">货位移动</string>
   <string name="Administrator">管理员</string>
   <string name="Administration">系统管理</string>
   <string name="TransferOrders">移库单查询</string>
@@ -116,4 +116,8 @@
   <string name="Error">出错</string>
   <string name="Pending">待定</string>
   <string name="Unposted">未过账</string>
+  <string name="RefNum">参考编号</string>
+  <string name="RefLine">参考行</string>
+  <string name="RefRel">参考发布</string>
+  <string name="DocumentNum">文档编号</string>
 </resources>

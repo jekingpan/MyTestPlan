@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextLinearLayout"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/RefNumLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="ref_num"
+            android:minWidth="250dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditLinearLayout"
+        android:paddingBottom="3dp">
+        <EditText xmlns:tools="http://schemas.android.com/tools"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EditText"
+            tools:text="ref_num"
+            android:singleLine="true"
+            android:minWidth="250dp"
+            android:hint="@string/RefNum" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditLinearLayout"
+        android:paddingBottom="3dp">
+        <EditText xmlns:tools="http://schemas.android.com/tools"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Edit1Text"
+            tools:text="ref_line"
+            android:singleLine="true"
+            android:width="100dp"
+            android:numeric="integer"
+            android:hint="@string/RefLine" />
+        <EditText xmlns:tools="http://schemas.android.com/tools"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Edit2Text"
+            tools:text="ref_release"
+            android:maxWidth="50dp"
+            android:minWidth="50dp"
+            android:singleLine="true"
+            android:width="100dp"
+            android:numeric="integer"
+            android:hint="@string/RefRel" />
+    </LinearLayout>
+</LinearLayout>

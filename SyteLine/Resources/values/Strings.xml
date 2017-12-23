@@ -116,4 +116,8 @@
   <string name="Error">Error</string>
   <string name="Pending">Pending</string>
   <string name="Unposted">Unposted</string>
+  <string name="RefNum">Reference Number</string>
+  <string name="RefLine">Reference Line</string>
+  <string name="RefRel">Reference Release</string>
+  <string name="DocumentNum">Document Number</string>
 </resources>

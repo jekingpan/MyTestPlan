@@ -21,6 +21,7 @@ namespace SyteLine.Classes.Activities.Common
         protected List<BaseBusinessObject> SencondObjects = new List<BaseBusinessObject>();
         protected List<AdapterList> AdapterLists = new List<AdapterList>();
         protected AdapterList AdapterListTemplate = new AdapterList();
+        protected bool StartRefresh = true;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -133,7 +134,7 @@ namespace SyteLine.Classes.Activities.Common
 
             try
             {
-                for (int i = 0; i< SencondObjects.Count; i++)
+                for (int i = 0; i < SencondObjects.Count; i++)
                 {
                     await ReadIDOs(i);
                 }
@@ -171,7 +172,11 @@ namespace SyteLine.Classes.Activities.Common
             try
             {
                 PrepareIDOs(index);
-                await Task.Run(() => SencondObjects[index].Read());
+
+                if (StartRefresh)
+                {
+                    await Task.Run(() => SencondObjects[index].Read());
+                }
 
                 if (SencondObjects[index].GetRowCount() < int.Parse(new Configure().RecordCap))
                 {

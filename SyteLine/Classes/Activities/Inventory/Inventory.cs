@@ -25,7 +25,7 @@ namespace SyteLine.Classes.Activities.Inventory
 
             try
             {
-                GridViewAdapter GridAdapter = new GridViewAdapter(this, GridView);
+                CSIBaseGridViewerAdapter GridAdapter = new CSIBaseGridViewerAdapter(this, GridView);
                 GridAdapter.ActionItems.Add(new GridViewActionItem()
                 {
                     ThumbId = Resource.Drawable.stock,
@@ -36,7 +36,7 @@ namespace SyteLine.Classes.Activities.Inventory
                 {
                     ThumbId = Resource.Drawable.move,
                     Name = GetString(Resource.String.QuantityMove),
-                    //ActivityType = typeof(QuantityMove)
+                    ActivityType = typeof(QuantityMove)
                 });
                 GridAdapter.ActionItems.Add(new GridViewActionItem()
                 {
