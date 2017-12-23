@@ -111,4 +111,6 @@
   <string name="OrderLine">Order Line</string>
   <string name="Description">Description</string>
   <string name="DueDate">Due Date</string>
+  <string name="WarehouseName">WarehouseName</string>
+  <string name="LocDescription">LocDescription</string>
 </resources>

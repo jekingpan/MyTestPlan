@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using System.Collections.Generic;
 using SyteLine.Classes.Core.Common;
 using SyteLine.Classes.Activities.Common;
 using Android.Views;
@@ -14,7 +13,7 @@ using SyteLine.Classes.Adapters.Common;
 namespace SyteLine.Classes.Activities.Inventory
 {
     [Activity(Label = "@string/Items")]
-    public class Items : BaseSearchActivity
+    public class Items : CSIBaseSearchActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,48 +34,41 @@ namespace SyteLine.Classes.Activities.Inventory
         protected override void RegisterAdapter(bool Append)
         {
             base.RegisterAdapter(Append);
-            List<AdapterList> Rows;
-            ItemsAdapter Adapter = (ItemsAdapter)ListView.Adapter;
-            IDOItems Items = (IDOItems)BaseObject;
-            if (!Append)
-            {
-                Rows = new List<AdapterList>();
-            }
-            else
-            {
-                Rows = Adapter.objectList;
-            }
-            for (int i = 0; i < BaseObject.GetRowCount(); i++)
-            {
-                LastKey = Items.GetItem(i);
-                AdapterList adptList = new AdapterList();
-                adptList.Add("Item", Items.GetItem(i));
-                adptList.Add("Description", Items.GetDescription(i));
-                adptList.Add("DerQtyOnHand", Items.GetQtyOnHand(i));
-                adptList.Add("UM", Items.GetUM(i));
-                adptList.Add("MatlType", Items.GetMatlType(i));
-                adptList.Add("PMTCode", Items.GetMatlType(i));
-                adptList.Add("ProductCode", Items.GetProductCode(i));
-                adptList.Add("Picture", Items.GetPicture(i));
-                adptList.Add("LotTracked", Items.GetLotTracked(i));
-                adptList.Add("SerialTracked", Items.GetSerialTracked(i));
-                Rows.Add(adptList);
-            }
-            if (!Append)
-            {
-                ListView.Adapter = new ItemsAdapter(this, Rows);
-            }
 
+            if (!Append)
+            {
+                ListView.Adapter = new ItemsAdapter(this, AdapterLists);
+            }
         }
 
         protected override void PrepareIDOs()
         {
             base.PrepareIDOs();
             IDOItems Items = (IDOItems)BaseObject;
+            Items.parm.PropertyList = "";
+
+            AdapterList adptList = new AdapterList
+            {
+                KeyName = "Item"
+            };
+            adptList.Add("Item");
+            adptList.Add("Description");
+            adptList.Add("DerQtyOnHand", AdapterListItem.ValueTypes.Decimal);
+            adptList.Add("UM");
+            adptList.Add("MatlType");
+            adptList.Add("PMTCode");
+            adptList.Add("ProductCode");
+            adptList.Add("LotTracked", AdapterListItem.ValueTypes.Boolean);
+            adptList.Add("SerialTracked", AdapterListItem.ValueTypes.Boolean);
+            SetAdapterLists(0, adptList);
+            if (new Configure().LoadPicture)
+            {
+                adptList.Add("Picture", AdapterListItem.ValueTypes.Bitmap);
+            }
             if (QueryString == "")
             {
-                QueryString = "%";
-                Items.BuilderFilterByItem(QueryString);
+                //QueryString = "%";
+                Items.BuilderFilterByItem("%");
             }
             else
             {
@@ -86,11 +78,22 @@ namespace SyteLine.Classes.Activities.Inventory
             {
                 Items.BuilderAdditionalFilter(string.Format("Item > N'{0}'", LastKey));
             }
-            Items.parm.PropertyList = "Item,Description,DerQtyOnHand,UM,MatlType,PMTCode,ProductCode,LotTracked,SerialTracked";//,Picture
-            if (new Configure().LoadPicture)
+
+        }
+
+        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        {
+            string value = "";
+            switch (objIndex)
             {
-                Items.parm.PropertyList += ",Picture";
+                case 0:
+                    IDOItems Items = (IDOItems)BaseObject;
+                    value = Items.GetPropertyDisplayedValue(name, row);
+                    break;
+                default:
+                    break;
             }
+            return value;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

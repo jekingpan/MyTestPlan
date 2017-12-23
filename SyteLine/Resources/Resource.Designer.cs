@@ -350,25 +350,28 @@ namespace SyteLine
 			public const int CommonSearchViewer = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int CommonSplitterViewer = 2130968585;
+			public const int CommonSplitterSmallViewer = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int ImageTextViewerGrid = 2130968586;
+			public const int CommonSplitterViewer = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int ImageTextViewerLarge = 2130968587;
+			public const int ImageTextViewerGrid = 2130968587;
 			
 			// aapt resource value: 0x7f04000c
-			public const int ItemListViewer = 2130968588;
+			public const int ImageTextViewerLarge = 2130968588;
 			
 			// aapt resource value: 0x7f04000d
-			public const int Login = 2130968589;
+			public const int ItemListViewer = 2130968589;
 			
 			// aapt resource value: 0x7f04000e
-			public const int PurchaseOrderListViewer = 2130968590;
+			public const int Login = 2130968590;
 			
 			// aapt resource value: 0x7f04000f
-			public const int Settings = 2130968591;
+			public const int PurchaseOrderListViewer = 2130968591;
+			
+			// aapt resource value: 0x7f040010
+			public const int Settings = 2130968592;
 			
 			static Layout()
 			{
@@ -531,6 +534,9 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05003e
 			public const int Loading = 2131034174;
+			
+			// aapt resource value: 0x7f050070
+			public const int LocDescription = 2131034224;
 			
 			// aapt resource value: 0x7f050050
 			public const int LocType = 2131034192;
@@ -744,6 +750,9 @@ namespace SyteLine
 			
 			// aapt resource value: 0x7f05004b
 			public const int Warehouse = 2131034187;
+			
+			// aapt resource value: 0x7f05006f
+			public const int WarehouseName = 2131034223;
 			
 			// aapt resource value: 0x7f050049
 			public const int Warehouses = 2131034185;

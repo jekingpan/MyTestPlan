@@ -10,7 +10,7 @@ using SyteLine.Classes.Adapters.Common;
 namespace SyteLine.Classes.Activities.Inventory
 {
     [Activity(Label = "@string/Inventory")]
-    public class Inventory : BaseActivity
+    public class Inventory : CSIBaseActivity
     {
         private GridView GridView;
 

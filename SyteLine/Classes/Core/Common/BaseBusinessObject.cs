@@ -142,6 +142,70 @@ namespace SyteLine.Classes.Core.Common
             }
         }
 
+        public int GetPropertyInt(string Name)
+        {
+            try
+            {
+                return int.Parse(GetPropertyValue(Name, 0));
+            }
+            catch (Exception Ex)
+            {
+                return 0;
+                throw Ex;
+            }
+        }
+
+        public int GetPropertyInt(string Name, int Row)
+        {
+            try
+            {
+                return int.Parse(GetPropertyValue(Name, Row));
+            }
+            catch (Exception Ex)
+            {
+                return 0;
+                throw Ex;
+            }
+        }
+
+        public bool GetPropertyBoolean(string Name)
+        {
+            try
+            {
+                return bool.Parse(GetPropertyValue(Name, 0));
+            }
+            catch (Exception Ex)
+            {
+                return false;
+                throw Ex;
+            }
+        }
+
+        public bool GetPropertyBoolean(string Name, int Row)
+        {
+            try
+            {
+                return bool.Parse(GetPropertyValue(Name, Row));
+            }
+            catch (Exception Ex)
+            {
+                return false;
+                throw Ex;
+            }
+        }
+
+        public virtual string GetPropertyDisplayedValue(string Name, int Row)
+        {
+            string value = "";
+            switch (Name)
+            {
+                default:
+                    value = GetPropertyValue(Name, Row);
+                    break;
+            } 
+            return value;
+        }
+
         public string GetPropertyValue(string Name, int Row)
         {
             string value = "";

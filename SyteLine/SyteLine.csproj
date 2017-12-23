@@ -72,9 +72,9 @@
     <Compile Include="Classes\Activities\Admin\Main.cs" />
     <Compile Include="Classes\Activities\Admin\Login.cs" />
     <Compile Include="Classes\Activities\Admin\Settings.cs" />
-    <Compile Include="Classes\Activities\Common\BaseActivity.cs" />
-    <Compile Include="Classes\Activities\Common\BaseDetailActivity.cs" />
-    <Compile Include="Classes\Activities\Common\BaseSearchActivity.cs" />
+    <Compile Include="Classes\Activities\Common\CSIBaseActivity.cs" />
+    <Compile Include="Classes\Activities\Common\CSIBaseDetailActivity.cs" />
+    <Compile Include="Classes\Activities\Common\CSIBaseSearchActivity.cs" />
     <Compile Include="Classes\Activities\Inventory\MiscIssueReceipt.cs" />
     <Compile Include="Classes\Activities\Inventory\Items.cs" />
     <Compile Include="Classes\Activities\Inventory\ItemDetails.cs" />
@@ -83,6 +83,7 @@
     <Compile Include="Classes\Activities\Purchase\PurchaseOrders.cs" />
     <Compile Include="Classes\Adapters\Common\AdapterList.cs" />
     <Compile Include="Classes\Adapters\Common\CSIBaseAdapter.cs" />
+    <Compile Include="Classes\Adapters\Common\CSIBaseDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
@@ -154,7 +155,7 @@
     <AndroidResource Include="Resources\layout\CommonLabelMultiLinesTextViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\CommonSplitterViewer.axml">
+    <AndroidResource Include="Resources\layout\CommonSplitterSmallViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ItemListViewer.axml">
@@ -164,6 +165,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonHeadDetailsViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonSplitterViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\IDOWebService\IDOWebService.wsdl" />

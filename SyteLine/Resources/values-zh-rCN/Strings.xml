@@ -111,4 +111,6 @@
   <string name="OrderLine">订单行</string>
   <string name="Description">描述</string>
   <string name="DueDate">到期日</string>
+  <string name="WarehouseName">仓库名称</string>
+  <string name="LocDescription">货位描述</string>
 </resources>

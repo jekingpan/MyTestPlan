@@ -187,6 +187,28 @@ namespace SyteLine.Classes.Business.Purchase
         {
             return base.GetPropertyValue("ReqNum", index);
         }
-
+        
+        public override string GetPropertyDisplayedValue(string Name, int Row)
+        {
+            string value = "";
+            switch (Name)
+            {
+                case "Type":
+                    value = GetType(Row);
+                    break;
+                case "Stat":
+                    value = GetStat(Row);
+                    break;
+                case "OrderDate":
+                    value = GetOrderDate(Row);
+                    break;
+                case "PoCost":
+                    value = GetPoCost(Row);
+                    break; 
+                default:
+                    break;
+            }
+            return value;
+        }
     }
 }

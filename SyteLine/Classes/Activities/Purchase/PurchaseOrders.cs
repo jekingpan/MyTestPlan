@@ -5,16 +5,17 @@ using Android.Widget;
 using System.Collections.Generic;
 using SyteLine.Classes.Activities.Common;
 using Android.Views;
-using SyteLine.Classes.Adapters.Inventory;
 using SyteLine.Classes.Business.Purchase;
 using static Android.Widget.AdapterView;
 using SyteLine.Classes.Adapters.Purchase;
 using SyteLine.Classes.Adapters.Common;
+using System;
+using SyteLine.Classes.Core.Common;
 
 namespace SyteLine.Classes.Activities.Purchase
 {
     [Activity(Label = "@string/PurchaseOrders")]
-    public class PurchaseOrders : BaseSearchActivity
+    public class PurchaseOrders : CSIBaseSearchActivity
     {
         protected int DateQueryMenu = 0;
         protected string DateQueryString = "";
@@ -38,33 +39,10 @@ namespace SyteLine.Classes.Activities.Purchase
         protected override void RegisterAdapter(bool Append)
         {
             base.RegisterAdapter(Append);
-            List<AdapterList> Rows;
-            PurchaseOrdersAdapter Adapter = (PurchaseOrdersAdapter)ListView.Adapter;
-            IDOPurchaseOrders Orders = (IDOPurchaseOrders)BaseObject;
+            
             if (!Append)
             {
-                Rows = new List<AdapterList>();
-            }
-            else
-            {
-                Rows = Adapter.objectList;
-            }
-            for (int i = 0; i < Orders.GetRowCount(); i++)
-            {
-                LastKey = Orders.GetPoNum(i);
-                AdapterList adptList = new AdapterList();
-                adptList.Add("PoNum", Orders.GetPoNum(i));
-                adptList.Add("VendNum", Orders.GetVendNum(i));
-                adptList.Add("VendorName", Orders.GetVendorName(i));
-                adptList.Add("Stat", Orders.GetStat(i));
-                adptList.Add("OrderDate", Orders.GetOrderDate(i));
-                adptList.Add("Whse", Orders.GetWhse(i));
-                adptList.Add("Type", Orders.GetType(i));
-                Rows.Add(adptList);
-            }
-            if (!Append)
-            {
-                ListView.Adapter = new PurchaseOrdersAdapter(this, Rows);
+                ListView.Adapter = new PurchaseOrdersAdapter(this, AdapterLists);
             }
         }
 
@@ -72,10 +50,22 @@ namespace SyteLine.Classes.Activities.Purchase
         {
             base.PrepareIDOs();
             IDOPurchaseOrders Orders = (IDOPurchaseOrders)BaseObject;
+            Orders.parm.PropertyList = "";
+            AdapterList adptList = new AdapterList();
+            adptList.KeyName = "PoNum";
+            adptList.Add("PoNum");
+            adptList.Add("OrderDate", AdapterListItem.ValueTypes.Date);
+            adptList.Add("Stat");
+            adptList.Add("Type");
+            adptList.Add("VendNum");
+            adptList.Add("VendorName");
+            adptList.Add("Whse");
+            SetAdapterLists(0, adptList);
+            
             if (QueryString == "")
             {
-                QueryString = "%";
-                Orders.BuilderFilterByPoNum(QueryString);
+                //QueryString = "%";
+                Orders.BuilderFilterByPoNum("%");
             }
             else
             {
@@ -89,8 +79,22 @@ namespace SyteLine.Classes.Activities.Purchase
             {
                 Orders.BuilderAdditionalFilter(DateQueryString);
             }
-            Orders.parm.PropertyList = "PoNum,OrderDate,Stat,Type,VendNum,VendorName,Whse";
             Orders.BuilderAdditionalFilter("Stat IN (N'P', N'O')");
+        }
+
+        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        {
+            string value = "";
+            switch (objIndex)
+            {
+                case 0:
+                    IDOPurchaseOrders POs = (IDOPurchaseOrders)BaseObject;
+                    value = POs.GetPropertyDisplayedValue(name, row);
+                    break;
+                default:
+                    break;
+            }
+            return value;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -113,25 +117,31 @@ namespace SyteLine.Classes.Activities.Purchase
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            string Date = "", Date2 = "";
             if (item.ItemId == Resource.String.BeforeLast3Months)
             {
+                Date = DateTime.Now.Date.AddMonths(-3).ToShortDateString();
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
-                DateQueryString = "datediff(month ,getdate(), OrderDate) < -3";
+                DateQueryString = string.Format("OrderDate < N'{0}'", Date);//"{datediff}(month ,getdate(), OrderDate) < -3";
                 InitialList();
             }
             else if (item.ItemId == Resource.String.InLast3Month)
             {
+                Date = DateTime.Now.Date.AddMonths(-3).ToShortDateString();
+                Date2 = DateTime.Now.Date.AddDays(1).ToShortDateString();
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
-                DateQueryString = "datediff(day,getdate(), OrderDate) < 0 AND datediff(month ,getdate(), OrderDate) >= -3";
+                DateQueryString = string.Format("OrderDate Between N'{0}' and N'{1}'", Date, Date2);//"{datediff}(day,getdate(), OrderDate) < 0 AND {datediff}(month ,getdate(), OrderDate) >= -3";
                 InitialList();
             }
             else if (item.ItemId == Resource.String.InThisMonth)
             {
+                Date = DateTime.Now.Date.AddDays(1 - DateTime.Now.Date.Day).ToShortDateString();
+                Date2 = DateTime.Now.Date.AddDays(1).ToShortDateString();
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
-                DateQueryString = "datediff(month ,getdate(), OrderDate) = 0";
+                DateQueryString = string.Format("OrderDate Between N'{0}' and N'{1}'", Date, Date2);//"{datediff}(month ,getdate(), OrderDate) = 0";
                 InitialList();
             }
             else if (item.ItemId == Resource.String.All)
