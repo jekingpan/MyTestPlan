@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/CSIWebServer" />
+            android:hint="@string/CSIWebServer"
+            android:inputType="textNoSuggestions" />
         <TextView
             android:text="@string/Configuration"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -53,7 +54,7 @@
                 android:text="@string/RecordCap"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/NumberPerPageLabel"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:paddingTop="10dp" />
             <EditText
@@ -65,7 +66,7 @@
                 android:text="20"
                 android:gravity="right"
                 android:singleLine="true"
-                android:maxLength="100" />
+                android:maxLength="4" />
         </LinearLayout>
         <Switch
             android:id="@+id/EnableHTTPSEdit"
@@ -104,7 +105,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/User" />
+            android:hint="@string/User"
+            android:inputType="textNoSuggestions" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -125,6 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/Password" />
+            android:hint="@string/Password"
+            android:inputType="textVisiblePassword" />
     </LinearLayout>
 </ScrollView>

@@ -20,7 +20,7 @@ namespace SyteLine.Classes.Activities.Inventory
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.BaseObject = new IDOItems(base.Intent.GetStringExtra("SessionToken"), this);
-            base.AddSecondObject( new IDOItemLocs(base.Intent.GetStringExtra("SessionToken"), this));
+            base.AddSecondObject(new IDOItemLocs(base.Intent.GetStringExtra("SessionToken"), this));
             base.OnCreate(savedInstanceState);
         }
 
@@ -35,7 +35,7 @@ namespace SyteLine.Classes.Activities.Inventory
                 SetAdapterLists(0, "DerQtyOnHand", "DerQtyOnHand", ValueTypes.Decimal, GetString(Resource.String.OnHandQuantity));
                 SetAdapterLists(0, "UM", "UM", ValueTypes.String, GetString(Resource.String.UnitofMeasure));
                 SetAdapterLists(0, "MatlType", "MatlType", ValueTypes.String, GetString(Resource.String.MaterialType));
-                SetAdapterLists(0, "PMTCode", "PMTCode", ValueTypes.String, GetString(Resource.String.MaterialType));
+                SetAdapterLists(0, "PMTCode", "PMTCode", ValueTypes.String, GetString(Resource.String.MaterialSource));
                 SetAdapterLists(0, "ProductCode", "ProductCode", ValueTypes.String, GetString(Resource.String.ProductCode));
                 SetAdapterLists(0, "LotTracked", "LotTracked", ValueTypes.Boolean, GetString(Resource.String.LotTracked), Resource.Layout.CommonLabelSwitchViewer);
                 SetAdapterLists(0, "SerialTracked", "SerialTracked", ValueTypes.Boolean, GetString(Resource.String.SNTracked), Resource.Layout.CommonLabelSwitchViewer);
@@ -62,6 +62,9 @@ namespace SyteLine.Classes.Activities.Inventory
                 if (index == 1)
                 {
                     IDOItemLocs itemLoc = (IDOItemLocs)GetSecondObject(index);
+                    itemLoc.HideDuplcatedCol("Whse");
+                    itemLoc.HideDuplcatedCol("WhsName");
+                    itemLoc.HideDuplcatedCol("ItmwhseQtyOnHand");
                     itemLoc.parm.PropertyList = "";
                     SetAdapterLists(index, "Whse", "Whse", ValueTypes.String, GetString(Resource.String.Warehouse) + " - {0}", Resource.Layout.CommonSplitterViewer);
                     SetAdapterLists(index, "WhsName", "WhsName", ValueTypes.String, GetString(Resource.String.WarehouseName));

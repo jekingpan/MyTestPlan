@@ -5,11 +5,20 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/LoadingTextView"
+        android:visibility="gone"
+        android:text="@string/Loading"
+        android:gravity="center" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
+        android:id="@+id/linearLayout1"
+        android:background="@android:drawable/picture_frame">
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="100dp"
@@ -48,5 +57,6 @@
         android:id="@+id/ListView"
         android:smoothScrollbar="false"
         android:fastScrollEnabled="true"
-        android:fastScrollAlwaysVisible="false" />
+        android:fastScrollAlwaysVisible="false"
+        android:background="@android:drawable/picture_frame" />
 </LinearLayout>

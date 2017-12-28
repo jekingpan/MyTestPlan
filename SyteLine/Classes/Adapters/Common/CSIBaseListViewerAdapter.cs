@@ -59,7 +59,7 @@ namespace SyteLine.Classes.Adapters.Common
 
             View view = convertView;
             if (view == null) // no view to re-use, create new
-                view = context.LayoutInflater.Inflate(Resource.Layout.ImageTextViewerLarge, null);
+                view = context.LayoutInflater.Inflate(Resource.Layout.CommonImageTextViewerLarge, null);
             
             ImageView ImageView = view.FindViewById<ImageView>(Resource.Id.ImageView);
             TextView ActionText = view.FindViewById<TextView>(Resource.Id.ActionText);

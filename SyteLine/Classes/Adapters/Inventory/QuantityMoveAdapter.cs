@@ -9,6 +9,7 @@ using Android.Graphics;
 using SyteLine.Classes.Activities.Inventory;
 using SyteLine.Classes.Core.Common;
 using SyteLine.Classes.Adapters.Common;
+using Android.Text;
 
 namespace SyteLine.Classes.Adapters.Inventory
 {
@@ -19,8 +20,6 @@ namespace SyteLine.Classes.Adapters.Inventory
         {
             ;
         }
-
-
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -36,11 +35,10 @@ namespace SyteLine.Classes.Adapters.Inventory
 
             try
             {
-                //if (view == null) // no view to re-use, create new
-                //{
-                //    view = context.LayoutInflater.Inflate(item.GetLayoutID(Key), null);
-                //}
-                view = context.LayoutInflater.Inflate(item.GetLayoutID(Key), null);
+                if (view == null) // no view to re-use, create new
+                {
+                    view = context.LayoutInflater.Inflate(item.GetLayoutID(Key), null);
+                }
                 Label = view.FindViewById<TextView>(Resource.Id.Label);
                 Label.SetText(item.GetLabel(Key), null);
                 switch (LayoutID)
@@ -53,6 +51,18 @@ namespace SyteLine.Classes.Adapters.Inventory
                     case Resource.Layout.CommonSplitterSmallViewer:
                         break;
                     case Resource.Layout.CommonFloatingLabelEditViewer:
+                        Text = view.FindViewById<TextView>(Resource.Id.Text);
+                        Text.SetText(item.GetString(Key), null);
+                        if (string.IsNullOrEmpty(item.GetString(Key)))
+                        {
+                            Label.SetText("", null);
+                        }
+                        Text.Hint = item.GetLabel(Key);
+                        Text.TextChanged += (sender, e) =>
+                        {
+                            Label.SetText(item.GetLabel(Key), null);
+                            item.SetString(Key, Text.Text);
+                        };
                         break;
                     case Resource.Layout.CommonLabelTextViewer:
                     case Resource.Layout.CommonLabelMultiLinesTextViewer:

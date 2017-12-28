@@ -45,7 +45,7 @@ namespace SyteLine.Classes.Activities.Shopfloor
                     if (!(GridAdapter.ActionItems[args.Position].ActivityType is null))
                     {
                         Intent intent = new Intent(this, GridAdapter.ActionItems[args.Position].ActivityType);
-                        intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
+                        SetDefaultIntent(intent);
                         this.StartActivity(intent);
                     }
                 };

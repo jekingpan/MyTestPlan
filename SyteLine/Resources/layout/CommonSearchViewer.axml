@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/LoadingTextView"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="@string/Loading"
         android:gravity="center" />
     <ListView

@@ -37,6 +37,10 @@ namespace SyteLine.Classes.Core.Common
 
         private void ReadSOAPJsonHead(JsonReader jReader)
         {
+            if (jReader.Peek() == JsonToken.Null)
+            {
+                return;
+            }
             jReader.BeginObject();
             while (jReader.HasNext)
             {

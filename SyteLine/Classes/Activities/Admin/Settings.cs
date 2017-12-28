@@ -4,11 +4,12 @@ using Android.OS;
 using Android.Widget;
 using SyteLine.Classes.Core.Common;
 using Android.Views;
+using SyteLine.Classes.Activities.Common;
 
 namespace SyteLine.Classes.Activities.Admin
 {
     [Activity(Label = "@string/Settings")]
-    public class Settings : Activity
+    public class Settings : CSIBaseActivity
     {
         private Configure configure = new Configure();
 
@@ -27,10 +28,11 @@ namespace SyteLine.Classes.Activities.Admin
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            //    // Set our view from the Inentory layout resource
+            //    SetContentView(Resource.Layout.SystemSettings);
+            defaultLayoutID = Resource.Layout.SystemSettings;
 
-            // Set our view from the Inentory layout resource
-            SetContentView(Resource.Layout.Settings);
+            base.OnCreate(savedInstanceState);
 
             CSIWebServer = FindViewById<EditText>(Resource.Id.CSIWebServerEdit);
             EnableHTTPS = FindViewById<Switch>(Resource.Id.EnableHTTPSEdit);

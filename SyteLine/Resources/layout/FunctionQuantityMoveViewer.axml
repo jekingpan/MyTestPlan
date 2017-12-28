@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="@string/Warehouse"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/WarehouseText"
+                android:singleLine="true"
+                android:width="120dp" />
+            <TextView
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@string/Warehouse"
+                android:gravity="right" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/Warehouse"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/WarehouseEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:width="120dp" />
+            <TextView
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/TransDateEdit"
+                android:gravity="right" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:id="@+id/imageView1"
+        android:background="@android:drawable/bottom_bar" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/POLinearLayout">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout4">
+            <TextView xmlns:tools="http://schemas.android.com/tools"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/OrderNumText"
+                android:singleLine="true"
+                android:width="150dp"
+                android:layout_marginRight="140dp"
+                tools:text="@string/OrderNumber" />
+            <TextView
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/LineText"
+                android:singleLine="true"
+                android:width="50dp"
+                android:layout_marginLeft="-140dp" />
+            <TextView
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/ReleaseText"
+                android:singleLine="true"
+                android:width="50dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout5">
+            <EditText xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/OrderNumEdit"
+                android:width="150dp"
+                android:layout_marginRight="140dp"
+                tools:text="@string/OrderNumber"
+                android:hint="@string/OrderNumber"
+                android:inputType="textNoSuggestions" />
+            <EditText
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/LineEdit"
+                android:width="50dp"
+                android:layout_marginLeft="-140dp"
+                android:hint="0"
+                android:numeric="integer"
+                android:maxLength="3" />
+            <EditText
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/ReleaseEdit"
+                android:width="50dp"
+                android:hint="0"
+                android:numeric="integer"
+                android:maxLength="3" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/imageButton1"
+                android:maxWidth="40dp"
+                android:src="@drawable/scanner"
+                android:scaleType="centerCrop"
+                android:minWidth="40dp"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ItemLinearLayout">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout6">
+            <TextView
+                android:text="@string/Item"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ItemText" />
+        </LinearLayout>
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/ItemEdit"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/Item"
+            android:paddingLeft="10dp" />
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ItemDescriptionText"
+            tools:text="@string/Description"
+            android:paddingLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/InventoryLinearLayout">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout7">
+            <TextView
+                android:text="@string/Location"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/LocationText" />
+            <TextView
+                android:text="@string/Quantity"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/QuantityText" />
+            <TextView
+                android:text="@string/UM"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/UNText" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/LocationEdit"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Location"
+                android:inputType="textNoSuggestions" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/QuantityEdit"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/Quantity"
+                android:numeric="decimal"
+                android:inputType="numberDecimal"
+                android:maxLength="18" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/UMEdit"
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:text="@string/UM"
+                android:inputType="textNoSuggestions" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

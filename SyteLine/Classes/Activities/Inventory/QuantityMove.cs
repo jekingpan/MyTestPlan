@@ -18,6 +18,7 @@ namespace SyteLine.Classes.Activities.Inventory
         {
             BaseObject = new IDODcmoves(Intent.GetStringExtra("SessionToken"), this);
             StartRefresh = false;
+            defaultLayoutID = Resource.Layout.FunctionQuantityMoveViewer;
             base.OnCreate(savedInstanceState);
         }
 
@@ -48,6 +49,11 @@ namespace SyteLine.Classes.Activities.Inventory
             SetAdapterLists(0, "Lot2", "Lot2", ValueTypes.String, GetString(Resource.String.Lot), Resource.Layout.CommonFloatingLabelEditViewer);
             SetAdapterLists(0, "TransDate", "TransDate", ValueTypes.Date, GetString(Resource.String.Date), Resource.Layout.CommonFloatingLabelEditViewer);
             SetAdapterLists(0, "DocumentNum", "DocumentNum", ValueTypes.String, GetString(Resource.String.DocumentNum), Resource.Layout.CommonFloatingLabelEditViewer);
+        }
+
+        protected override void UpdateAdapterLists(int index = 0)
+        {
+            base.UpdateAdapterLists(index);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

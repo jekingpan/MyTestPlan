@@ -29,7 +29,8 @@
             android:gravity="center"
             android:singleLine="true"
             tools:text="@string/User"
-            android:hint="@string/User" />
+            android:hint="@string/User"
+            android:inputType="textNoSuggestions" />
         <TextView
             android:text="@string/Password"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -46,7 +47,8 @@
             android:singleLine="true"
             android:textIsSelectable="false"
             tools:text="@string/Password"
-            android:hint="@string/Password" />
+            android:hint="@string/Password"
+            android:inputType="textVisiblePassword" />
         <TextView
             android:text="@string/Configuration"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -67,7 +69,7 @@
             android:enabled="false" />
         <Switch
             android:text="@string/SaveUser"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:id="@+id/SaveUserSwitch"
@@ -78,7 +80,7 @@
             android:layout_gravity="right"
             android:id="@+id/SavePasswordSwitch"
             android:width="150dp"
-            android:layout_width="wrap_content" />
+            android:layout_width="match_parent" />
         <Button
             android:text="@string/Settings"
             android:layout_width="match_parent"

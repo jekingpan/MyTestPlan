@@ -18,11 +18,16 @@ namespace SyteLine.Classes.Adapters.Common
         {
             AdapterList item = objectList[position];
 
+            if (item.ObjectList.Count == 0)
+            {
+                return null;
+            }
+
             View view = convertView;
             TextView Text;
             TextView Label;
             Switch Switch;
-
+            
             string Key = item.GetFirstKey();
             int LayoutID = item.GetLayoutID(Key);
 

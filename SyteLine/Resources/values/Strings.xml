@@ -25,6 +25,7 @@
   <string name="Configuration">Configuration</string>
   <string name="SingOut">Sing Out</string>
   <string name="PleaseGoToSettings">Cannot get configuration list. If this is your first time run application, please click Settings button to register.</string>
+  <string name="CannotGetEmployee">Cannot get Employee Number associated with the account.Please ask Administrator for help.</string>
   <string name="ClickBackToExit">Click Back again to Exit.</string>
   <string name="RecordCap">Record Cap</string>
   <string name="Refresh">Refresh</string>
@@ -120,4 +121,10 @@
   <string name="RefLine">Reference Line</string>
   <string name="RefRel">Reference Release</string>
   <string name="DocumentNum">Document Number</string>
+  <string name="About">About</string>
+  <string name="AboutSystem">Current User: {0}\r\nEmploee: {1}\r\n Configuration: {2}\r\nVersion: {3}\r\nStatus: {4}\r\nCopy Right: {5}</string>
+  <string name="LotTrack">Lot Track</string>
+  <string name="SNTrack">S/N Track</string>
+  <string name="OrderNumber">Order Number</string>
+  <string name="OrderRelease">Release Release</string>
 </resources>

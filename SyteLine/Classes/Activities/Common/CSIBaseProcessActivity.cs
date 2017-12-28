@@ -17,7 +17,10 @@ namespace SyteLine.Classes.Activities.Common
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            defaultLayoutID = Resource.Layout.CommonListViewer;
+            if (defaultLayoutID != 0){
+
+                defaultLayoutID = Resource.Layout.CommonListViewer;
+            }
 
             base.OnCreate(savedInstanceState);
         }
@@ -53,6 +56,34 @@ namespace SyteLine.Classes.Activities.Common
         protected override void UpdateAdapterLists(int index = 0)
         {
             base.UpdateAdapterLists(index);
+            foreach (AdapterList ListTemp in AdapterListTemplate)
+            {
+                if (ListTemp.ObjIndex != index)
+                {
+                    continue;
+                }
+                AdapterList colonList = new AdapterList
+                {
+                    KeyName = ListTemp.KeyName
+                };
+                foreach (string key in ListTemp.ObjectList.Keys) //go through adapter items
+                {
+                    AdapterListItem obj = ListTemp.ObjectList[key];
+                    AdapterListItem colonItem = new AdapterListItem
+                    {
+                        Name = obj.Name,
+                        Label = obj.Label,
+                        LayoutID = obj.LayoutID,
+                        Value = obj.Value,
+                        ValueType = obj.ValueType,
+                        DisplayedValue = obj.DisplayedValue,
+                        Key = obj.Key,
+                        ActivityType = obj.ActivityType
+                    };
+                    colonList.Add(colonItem);
+                }
+                AdapterLists.Add(colonList);
+            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

@@ -89,6 +89,7 @@
     <Compile Include="Classes\Adapters\Inventory\QuantityMoveAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
+    <Compile Include="Classes\Business\Admin\IDOEmployees.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
     <Compile Include="Classes\Business\Inventory\IDODcmoves.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrderLines.cs" />
@@ -130,16 +131,16 @@
     <AndroidResource Include="Resources\layout\CommonListViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ImageTextViewerLarge.axml">
+    <AndroidResource Include="Resources\layout\CommonImageTextViewerLarge.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Settings.axml">
+    <AndroidResource Include="Resources\layout\SystemSettings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Login.axml">
+    <AndroidResource Include="Resources\layout\SystemLogin.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\PurchaseOrderListViewer.axml">
+    <AndroidResource Include="Resources\layout\ListItemPurchaseOrderViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonSearchViewer.axml">
@@ -148,7 +149,7 @@
     <AndroidResource Include="Resources\layout\CommonGridViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ImageTextViewerGrid.axml">
+    <AndroidResource Include="Resources\layout\CommonImageTextViewerGrid.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonLabelSwitchViewer.axml">
@@ -166,7 +167,7 @@
     <AndroidResource Include="Resources\layout\CommonSplitterSmallViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ItemListViewer.axml">
+    <AndroidResource Include="Resources\layout\ListItemItemViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonFloatingLabelEditViewer.axml">
@@ -179,6 +180,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonFloatingLabelRefNumEditViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FunctionQuantityMoveViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\IDOWebService\IDOWebService.wsdl" />
@@ -290,6 +294,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\scanner.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

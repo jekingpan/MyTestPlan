@@ -3,15 +3,15 @@ using SyteLine.Classes.Core.CSIWebServices;
 
 namespace SyteLine.Classes.Business.Admin
 {
-    class IDOUsers : BaseBusinessObject
+    class IDOEmployees : BaseBusinessObject
     {
-        public IDOUsers(SOAPParameters parm) : base(parm)
+        public IDOEmployees(SOAPParameters parm) : base(parm)
         {
             this.parm = parm;
             DefaultParm();
         }
 
-        public IDOUsers(string Token) : base(Token)
+        public IDOEmployees(string Token) : base(Token)
         {
             DefaultParm();
         }
@@ -19,8 +19,8 @@ namespace SyteLine.Classes.Business.Admin
         protected override void DefaultParm()
         {
             base.DefaultParm();
-            parm.IDOName = "SLUserNames";
-            parm.PropertyList = "UserId,Username,UserDesc,UserLocalWhse";
+            parm.IDOName = "SLEmployees";
+            parm.PropertyList = "EmpNum,Name,Nickname";
         }
 
         public void BuilderFileByUserName(string UserName)

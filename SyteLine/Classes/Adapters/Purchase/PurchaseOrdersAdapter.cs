@@ -27,7 +27,7 @@ namespace SyteLine.Classes.Adapters.Purchase
             View view = convertView;
 
             if (view == null) // no view to re-use, create new
-                view = context.LayoutInflater.Inflate(Resource.Layout.PurchaseOrderListViewer, null);
+                view = context.LayoutInflater.Inflate(Resource.Layout.ListItemPurchaseOrderViewer, null);
 
             TextView PONumEdit = view.FindViewById<TextView>(Resource.Id.PONumrEdit);
             TextView VendNumEdit = view.FindViewById<TextView>(Resource.Id.VendNumEdit);

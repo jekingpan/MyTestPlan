@@ -45,7 +45,7 @@ namespace SyteLine.Classes.Adapters.Common
 
                 View view = convertView;
                 if (view == null) // no view to re-use, create new
-                    view = context.LayoutInflater.Inflate(Resource.Layout.ImageTextViewerGrid, null);
+                    view = context.LayoutInflater.Inflate(Resource.Layout.CommonImageTextViewerGrid, null);
 
                 ImageView imageView = view.FindViewById<ImageView>(Resource.Id.ImageView);
                 TextView textView = view.FindViewById<TextView>(Resource.Id.ActionText);

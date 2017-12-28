@@ -103,56 +103,144 @@ namespace SyteLine.Classes.Activities.Common
         protected override void UpdateAdapterLists(int index = 0)
         {
             base.UpdateAdapterLists(index);
+
             //foreach (BaseBusinessObject o in  
             for (int i = 0; i < SencondObjects[index].GetRowCount(); i++) //go through IDO rows
             {
-                for (int j = 0; j < AdapterLists.Count; j++) //go through defind adapter/properties
+                foreach (AdapterList ListTemp in AdapterListTemplate)
                 {
-                    foreach (AdapterListItem obj in AdapterLists[j].ObjectList.Values) //go through adapter items
+                    bool skip = false;
+                    if (ListTemp.ObjIndex != index)
                     {
-                        if (!string.IsNullOrEmpty(obj.Name) && (!obj.Modified))
+                        continue;
+                    }
+                    AdapterList colonList = new AdapterList
+                    {
+                        KeyName = ListTemp.KeyName
+                    };
+                    foreach (string key in ListTemp.ObjectList.Keys) //go through adapter items
+                    {
+                        AdapterListItem obj = ListTemp.ObjectList[key];
+
+                        //check if the field need to be hide when repeat displaying
+                        if (SencondObjects[index].IsDuplicatedCol(key))
+                        {
+                            if (i > 0 && SencondObjects[index].GetPropertyValue(obj.Name, i) == SencondObjects[index].GetPropertyValue(obj.Name, i - 1))
+                            {
+                                skip = true;
+                                continue;
+                            }
+                        }
+
+                        AdapterListItem colonItem = new AdapterListItem
+                        {
+                            Name = obj.Name,
+                            Label = obj.Label,
+                            LayoutID = obj.LayoutID,
+                            ValueType = obj.ValueType,
+                            DisplayedValue = obj.DisplayedValue,
+                            Key = obj.Key,
+                            ActivityType = obj.ActivityType
+                        };
+                        if (!string.IsNullOrEmpty(obj.Name))
                         {
                             switch (obj.ValueType)
                             {
                                 case AdapterListItem.ValueTypes.String:
-                                    obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Int:
-                                    obj.Value = SencondObjects[index].GetPropertyInt(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyInt(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Decimal:
-                                    obj.Value = string.Format("{0:###,###,###,###,##0.00######}", SencondObjects[index].GetPropertyDecimalValue(obj.Name, i));
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = string.Format("{0:###,###,###,###,##0.00######}", SencondObjects[index].GetPropertyDecimalValue(obj.Name, i));
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Date:
-                                    obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.DateTime:
-                                    obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Bitmap:
-                                    obj.Value = SencondObjects[index].GetPropertyBitmap(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyBitmap(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Boolean:
-                                    obj.Value = SencondObjects[index].GetPropertyBoolean(obj.Name, i);
-                                    obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = SencondObjects[index].GetPropertyBoolean(obj.Name, i);
+                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
                                     break;
                                 default:
-                                    obj.Value = null;
+                                    colonItem.Value = null;
                                     break;
                             }
-
-                            obj.Modified = true;
                         }
+                        colonList.ObjectList.Add(key, colonItem);
+                    }
+                    if (!skip)
+                    {
+                        AdapterLists.Add(colonList);
                     }
                 }
             }
         }
+
+        //protected override void UpdateAdapterLists(int index = 0)
+        //{
+        //    base.UpdateAdapterLists(index);
+        //    //foreach (BaseBusinessObject o in  
+        //    for (int i = 0; i < SencondObjects[index].GetRowCount(); i++) //go through IDO rows
+        //    {
+        //        for (int j = 0; j < AdapterLists.Count; j++) //go through defind adapter/properties
+        //        {
+        //            foreach (AdapterListItem obj in AdapterLists[j].ObjectList.Values) //go through adapter items
+        //            {
+        //                if (!string.IsNullOrEmpty(obj.Name) && (!obj.Modified))
+        //                {
+        //                    switch (obj.ValueType)
+        //                    {
+        //                        case AdapterListItem.ValueTypes.String:
+        //                            obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.Int:
+        //                            obj.Value = SencondObjects[index].GetPropertyInt(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.Decimal:
+        //                            obj.Value = string.Format("{0:###,###,###,###,##0.00######}", SencondObjects[index].GetPropertyDecimalValue(obj.Name, i));
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.Date:
+        //                            obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.DateTime:
+        //                            obj.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.Bitmap:
+        //                            obj.Value = SencondObjects[index].GetPropertyBitmap(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        case AdapterListItem.ValueTypes.Boolean:
+        //                            obj.Value = SencondObjects[index].GetPropertyBoolean(obj.Name, i);
+        //                            obj.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+        //                            break;
+        //                        default:
+        //                            obj.Value = null;
+        //                            break;
+        //                    }
+        //                    obj.Modified = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {

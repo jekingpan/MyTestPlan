@@ -17,6 +17,8 @@ namespace SyteLine.Classes.Adapters.Common
     public class AdapterList
     {
         public string KeyName;
+        public int ObjIndex = 0;
+        public int ObjRow = 0;
         //private Dictionary<string, AdapterListItem> objectList = new Dictionary<string, AdapterListItem>();
 
         public Dictionary<string, AdapterListItem> ObjectList { get; private set; }
@@ -85,8 +87,13 @@ namespace SyteLine.Classes.Adapters.Common
                 ValueType = vType,
                 Label = label,
                 LayoutID = layoutID,
-                ActivityType = activity
+                ActivityType = activity,
             });
+        }
+
+        public void Add(AdapterListItem listItem)
+        {
+            ObjectList.Add(listItem.Key, listItem);
         }
 
         public string GetLabel(string name)
@@ -178,13 +185,18 @@ namespace SyteLine.Classes.Adapters.Common
             string value = "";
             try
             {
-                value = GetDisplayedValue(name) == "" ? (string)GetValue(name) : GetDisplayedValue(name);
+                value = string.IsNullOrEmpty(GetDisplayedValue(name)) ? (string)GetValue(name) : GetDisplayedValue(name);
                 return value;
             }
             catch
             {
                 return "";
             }
+        }
+
+        public void SetString(string name, string value)
+        {
+            ObjectList[name].Value = value;
         }
 
         public string GetName(string key)
@@ -239,7 +251,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return (string)ObjectList.First().Key;
+                return ObjectList.Keys.First();
             }
             catch
             {

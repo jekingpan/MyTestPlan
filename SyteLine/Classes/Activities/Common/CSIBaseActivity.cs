@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using SyteLine.Classes.Adapters.Common;
 using static SyteLine.Classes.Adapters.Common.AdapterListItem;
+using Android.Content;
 
 namespace SyteLine.Classes.Activities.Common
 {
@@ -20,11 +21,12 @@ namespace SyteLine.Classes.Activities.Common
         protected bool HasMoreRow = false;
         protected List<BaseBusinessObject> SencondObjects = new List<BaseBusinessObject>();
         protected List<AdapterList> AdapterLists = new List<AdapterList>();
-        protected AdapterList AdapterListTemplate = new AdapterList();
+        protected List<AdapterList> AdapterListTemplate = new List<AdapterList>();
         protected bool StartRefresh = true;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            SetTheme(Android.Resource.Style.ThemeHoloLight);
             base.OnCreate(savedInstanceState);
             // Set our view from the Inentory layout resource
             if (defaultLayoutID != 0)
@@ -69,7 +71,8 @@ namespace SyteLine.Classes.Activities.Common
                 }
             }
             SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
-            AdapterListTemplate = adapterList;
+            adapterList.ObjIndex = BaseObjectIndex;
+            AdapterListTemplate.Add(adapterList);
         }
 
         public virtual void SetAdapterLists(int BaseObjectIndex, string key, string property, ValueTypes type, string lable, int defaultLaoutID = Resource.Layout.CommonLabelTextViewer, Type defaultActivity = null)
@@ -87,7 +90,10 @@ namespace SyteLine.Classes.Activities.Common
             {
                 SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
             }
-            AdapterLists.Add(new AdapterList(key, property, "", lable, type, defaultLaoutID, defaultActivity));
+            AdapterListTemplate.Add(new AdapterList(key, property, "", lable, type, defaultLaoutID, defaultActivity)
+            {
+                ObjIndex = BaseObjectIndex
+            });
         }
 
         public virtual List<AdapterList> GetAdapterLists()
@@ -118,6 +124,10 @@ namespace SyteLine.Classes.Activities.Common
 
         protected virtual void RegisterAdapter(bool Append = false)
         {
+            //if (!Append)
+            //{
+                AdapterListTemplate.Clear();
+            //}
             if (!(LoadingTextView is null))
             {
                 LoadingTextView.Visibility = ViewStates.Gone;
@@ -126,7 +136,8 @@ namespace SyteLine.Classes.Activities.Common
         
         protected virtual async void InitialList()
         {
-            AdapterLists = new List<AdapterList>();
+            AdapterListTemplate.Clear();
+            AdapterLists.Clear();
             if (!(LoadingTextView is null))
             {
                 LoadingTextView.Visibility = ViewStates.Visible;
@@ -136,8 +147,18 @@ namespace SyteLine.Classes.Activities.Common
             {
                 for (int i = 0; i < SencondObjects.Count; i++)
                 {
+                    //await Task.Run(async () =>
+                    //{
+                    //    await ReadIDOs(i);
+                    //    UpdateAdapterLists(i);
+                    //}
+                    //);
                     await ReadIDOs(i);
+                    UpdateAdapterLists(i);
                 }
+
+                StartRefresh = true;
+
                 RegisterAdapter(false);
             }
             catch (Exception Ex)
@@ -186,7 +207,6 @@ namespace SyteLine.Classes.Activities.Common
                 {
                     HasMoreRow = true;
                 }
-                UpdateAdapterLists(index);
             }
             catch (Exception Ex)
             {
@@ -210,8 +230,8 @@ namespace SyteLine.Classes.Activities.Common
         {
             MenuInflater.Inflate(Resource.Menu.Main_Menus, menu);
             IMenuItem item = menu.FindItem(Resource.Id.Menu_CurrentConfiguration);
-            item.SetTitle(new Configure().Configuration);
-            item.SetEnabled(false);
+            item.SetTitle(GetString(Resource.String.About));           
+            //item.SetEnabled(false);
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -228,12 +248,65 @@ namespace SyteLine.Classes.Activities.Common
                 StartActivity(typeof(Admin.Login));
                 Finish();
             }
+            else if (item.ItemId == Resource.Id.Menu_CurrentConfiguration)
+            {
+                AlertDialog alertDialog = null;
+                AlertDialog.Builder builder = null;
+                alertDialog = null;
+                builder = new AlertDialog.Builder(this);
+                alertDialog = builder
+                .SetTitle(GetString(Resource.String.About))
+                .SetMessage((string.Format(GetString(Resource.String.AboutSystem), UserName() + " " + UserDesc(),
+                              EmpNum() + " " + EmpName(), new Configure().Configuration, "0,1(a)", "Lisenced", "N/A")))
+                .Create();
+                alertDialog.Show();
+            }
             return base.OnOptionsItemSelected(item);
         }
 
         public override bool OnPrepareOptionsMenu(IMenu menu)
         {
             return base.OnPrepareOptionsMenu(menu);
+        }
+
+        protected void SetDefaultIntent(Intent intent)
+        {
+            intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
+            intent.PutExtra("UserName", this.Intent.GetStringExtra("UserName"));
+            intent.PutExtra("UserDesc", this.Intent.GetStringExtra("UserDesc"));
+            intent.PutExtra("DefaultWhse", this.Intent.GetStringExtra("DefaultWhse"));
+            intent.PutExtra("EmpNum", this.Intent.GetStringExtra("EmpNum"));
+            intent.PutExtra("EmpName", this.Intent.GetStringExtra("EmpName"));
+        }
+
+        public string SessionToken()
+        {
+            return this.Intent.GetStringExtra("SessionToken");
+        }
+
+        public string UserName()
+        {
+            return this.Intent.GetStringExtra("UserName");
+        }
+
+        public string UserDesc()
+        {
+            return this.Intent.GetStringExtra("UserDesc");
+        }
+
+        public string DefaultWhse()
+        {
+            return this.Intent.GetStringExtra("DefaultWhse");
+        }
+
+        public string EmpNum()
+        {
+            return this.Intent.GetStringExtra("EmpNum");
+        }
+
+        public string EmpName()
+        {
+            return this.Intent.GetStringExtra("EmpName");
         }
     }
 }

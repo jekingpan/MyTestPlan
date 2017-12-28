@@ -38,6 +38,10 @@ namespace SyteLine.Classes.Core.Common
 
         private void ReadRESTJsonHead(JsonReader jReader)
         {
+            if (jReader.Peek() == JsonToken.Null)
+            {
+                return;
+            }
             jReader.BeginObject();
             try
             {
@@ -74,6 +78,11 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
+                if (jReader.Peek() == JsonToken.Null)
+                {
+                    jReader.SkipValue();
+                    return;
+                }
                 jReader.BeginArray();
                 while (jReader.HasNext)
                 {

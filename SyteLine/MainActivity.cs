@@ -10,7 +10,7 @@ using SyteLine.Classes.Activities.Inventory;
 
 namespace SyteLine
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", MainLauncher = false)]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

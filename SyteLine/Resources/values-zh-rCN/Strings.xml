@@ -25,6 +25,7 @@
   <string name="Configuration">站点配置</string>
   <string name="SingOut">注销</string>
   <string name="PleaseGoToSettings">不能获得服务器配置信息。如果您是第一次使用，请点击设置进行注册。</string>
+  <string name="CannotGetEmployee">不能获得用户相关的员工信息。请向管理员求助。</string>
   <string name="ClickBackToExit">再按一次退出。</string>
   <string name="RecordCap">每次读取记录数</string>
   <string name="Refresh">刷新</string>
@@ -120,4 +121,10 @@
   <string name="RefLine">参考行</string>
   <string name="RefRel">参考发布</string>
   <string name="DocumentNum">文档编号</string>
+  <string name="About">关于</string>
+  <string name="AboutSystem">当前用户: {0}\r\n当前员工: {1}\r\n站点配置: {2}\r\n版本: {3}\r\n状态: {4}\r\n版权: {5}</string>
+  <string name="LotTrack">批号跟踪</string>
+  <string name="SNTrack">序列号跟踪</string>
+  <string name="OrderNumber">单号</string>
+  <string name="OrderRelease">发布</string>
 </resources>

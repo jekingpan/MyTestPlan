@@ -26,8 +26,9 @@ namespace SyteLine.Classes.Activities.Admin
 
             try
             {
-                this.Title = string.Format(GetString(Resource.String.Welcome1), GetUserDesc() + "("+ Intent.GetStringExtra("User") + ")");
-
+                string displayedName = string.IsNullOrEmpty(EmpName()) ? string.IsNullOrEmpty(UserDesc()) ? "" : UserDesc() : EmpName();
+                Title = string.Format(GetString(Resource.String.Welcome1), displayedName);
+                
                 // Set our view from the Inentory layout resource
                 SetContentView(Resource.Layout.CommonListViewer);
 
@@ -38,22 +39,16 @@ namespace SyteLine.Classes.Activities.Admin
                 CommandListView.ItemClick += delegate (object sender, ItemClickEventArgs args)
                 {
                     Intent intent = new Intent(this, CommandList[args.Position].ActivityType);
-                    intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
+                    SetDefaultIntent(intent);
                     StartActivity(intent);
                 };
             }
             catch (Exception Ex)
             {
+                StartActivity(typeof(Login));
+                this.Finish();
                 Toast.MakeText(this, "Main -> OnCreate() -> " + Ex.Message, ToastLength.Short).Show();
             }
-        }
-
-        private string GetUserDesc()
-        {
-            IDOUsers users = new IDOUsers(Intent.GetStringExtra("SessionToken"));
-            users.BuilderFileByUserName(Intent.GetStringExtra("User"));
-            users.Read();
-            return users.GetPropertyValue("UserDesc");
         }
 
         public void InitialCommandList()
@@ -93,7 +88,6 @@ namespace SyteLine.Classes.Activities.Admin
             };
 
             CommandListView.Adapter = new CSIBaseListViewerAdapter(this, CommandList);
-
         }
 
         public override bool OnKeyDown(Keycode keyCode, KeyEvent e)

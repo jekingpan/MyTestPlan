@@ -31,7 +31,7 @@ namespace SyteLine.Classes.Activities.Purchase
             base.ListViewClicked(sender, args);
             PurchaseOrdersAdapter po = (PurchaseOrdersAdapter)ListView.Adapter;
             Intent intent = new Intent(this, typeof(PurchaseOrderDetails));
-            intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
+            SetDefaultIntent(intent);
             intent.PutExtra("PoNum", po.objectList[args.Position].GetString("PoNum"));
             StartActivity(intent);
         }
@@ -81,7 +81,7 @@ namespace SyteLine.Classes.Activities.Purchase
             {
                 Orders.BuilderAdditionalFilter(DateQueryString);
             }
-            Orders.BuilderAdditionalFilter("Stat IN (N'P', N'O')");
+            Orders.BuilderAdditionalFilter(string.Format("Stat IN (N'P', N'O') AND Whse = N'{0}'", DefaultWhse()));
         }
 
         protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)

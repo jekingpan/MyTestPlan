@@ -18,6 +18,8 @@ namespace SyteLine.Classes.Core.Common
         private BaseIDOResult BaseResult;
         protected Context context;
         protected bool IsReading = false;
+        protected List<string> HideDuplicatedList = new List<string>();
+
         public int CurrentRow { get; set; }
 
         public BaseBusinessObject(SOAPParameters parm, Context con = null)
@@ -27,7 +29,6 @@ namespace SyteLine.Classes.Core.Common
             configure = new Configure();
             DefaultParm();
         }
-
 
         public BaseBusinessObject(string Token, Context con = null)
         {
@@ -39,6 +40,16 @@ namespace SyteLine.Classes.Core.Common
                 Token = Token
             };
             DefaultParm();
+        }
+
+        public void HideDuplcatedCol(string Name)
+        {
+            HideDuplicatedList.Add(Name);
+        }
+
+        public bool IsDuplicatedCol(string Name)
+        {
+            return HideDuplicatedList.Contains(Name);
         }
 
         protected virtual void DefaultParm()
@@ -190,7 +201,7 @@ namespace SyteLine.Classes.Core.Common
         {
             try
             {
-                return bool.Parse(GetPropertyValue(Name, Row));
+                return (GetPropertyValue(Name, Row) == "1");
             }
             catch (Exception Ex)
             {
@@ -310,6 +321,11 @@ namespace SyteLine.Classes.Core.Common
             {
                 throw Ex;
             }
+        }
+
+        public void CleanResult()
+        {
+            BaseResult = null;
         }
     }
     

@@ -26,7 +26,7 @@ namespace SyteLine.Classes.Activities.Inventory
             base.ListViewClicked(sender, args);
             ItemsAdapter itm = (ItemsAdapter)ListView.Adapter;
             Intent intent = new Intent(this, typeof(ItemDetails));
-            intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
+            SetDefaultIntent(intent);
             intent.PutExtra("Item", itm.objectList[args.Position].GetString("Item"));
             StartActivity(intent);
         }
@@ -60,7 +60,6 @@ namespace SyteLine.Classes.Activities.Inventory
             adptList.Add("ProductCode");
             adptList.Add("LotTracked", AdapterListItem.ValueTypes.Boolean);
             adptList.Add("SerialTracked", AdapterListItem.ValueTypes.Boolean);
-            SetAdapterLists(0, adptList);
             if (new Configure().LoadPicture)
             {
                 adptList.Add("Picture", AdapterListItem.ValueTypes.Bitmap);
@@ -78,6 +77,7 @@ namespace SyteLine.Classes.Activities.Inventory
             {
                 Items.BuilderAdditionalFilter(string.Format("Item > N'{0}'", LastKey));
             }
+            SetAdapterLists(0, adptList);
 
         }
 
