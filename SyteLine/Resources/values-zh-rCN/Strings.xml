@@ -78,7 +78,8 @@
   <string name="Stockroom">库房</string>
   <string name="Warehouse">仓库</string>
   <string name="Location">货位</string>
-  <string name="ExpirationDate">有效期</string>
+  <string name="ExpirationDate">过期日期</string>
+  <string name="EffectiveDate">生效日期</string>
   <string name="Transit">中转</string>
   <string name="Stock">库存</string>
   <string name="LocType">货位类型</string>
@@ -107,6 +108,7 @@
   <string name="AfterNext3Month">未来三个月之后</string>
   <string name="Filled">已供货</string>
   <string name="PurchaseOrderDetails">采购单明细</string>
+  <string name="PurchaseOrderBlanketDetails">采购单总括明细</string>
   <string name="OrderDate">订购日期</string>
   <string name="Line">行</string>
   <string name="OrderLine">订单行</string>
@@ -127,4 +129,10 @@
   <string name="SNTrack">序列号跟踪</string>
   <string name="OrderNumber">单号</string>
   <string name="OrderRelease">发布</string>
+  <string name="Reason">原因</string>
+  <string name="VendorItem">供应商物料号</string>
+  <string name="BlanketLine">总括单行</string>
+  <string name="QuantityReceived">接收数量</string>
+  <string name="PromiseDate">承诺日期</string>
+  <string name="Line0"> (第{0}行)</string>
 </resources>

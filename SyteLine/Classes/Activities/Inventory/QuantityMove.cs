@@ -16,7 +16,7 @@ namespace SyteLine.Classes.Activities.Inventory
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            BaseObject = new IDODcmoves(Intent.GetStringExtra("SessionToken"), this);
+            PrimaryBusinessObject = new IDODcmoves(SessionToken(), this);
             StartRefresh = false;
             defaultLayoutID = Resource.Layout.FunctionQuantityMoveViewer;
             base.OnCreate(savedInstanceState);
@@ -32,10 +32,10 @@ namespace SyteLine.Classes.Activities.Inventory
             }
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
-            IDODcmoves Items = (IDODcmoves)BaseObject;
+            base.BeforeReadIDOs();
+            IDODcmoves Items = (IDODcmoves)PrimaryBusinessObject;
             Items.parm.PropertyList = "";
 
             SetAdapterLists(0, "Whse", "Whse", ValueTypes.String, GetString(Resource.String.Warehouse), Resource.Layout.CommonFloatingLabelEditViewer);
@@ -51,9 +51,9 @@ namespace SyteLine.Classes.Activities.Inventory
             SetAdapterLists(0, "DocumentNum", "DocumentNum", ValueTypes.String, GetString(Resource.String.DocumentNum), Resource.Layout.CommonFloatingLabelEditViewer);
         }
 
-        protected override void UpdateAdapterLists(int index = 0)
+        protected override void PostReadIDOs(int index = 0)
         {
-            base.UpdateAdapterLists(index);
+            base.PostReadIDOs(index);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

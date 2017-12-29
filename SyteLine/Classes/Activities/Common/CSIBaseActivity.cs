@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using SyteLine.Classes.Adapters.Common;
 using static SyteLine.Classes.Adapters.Common.AdapterListItem;
 using Android.Content;
+using ZXing.Mobile;
+using ZXing;
 
 namespace SyteLine.Classes.Activities.Common
 {
@@ -17,16 +19,21 @@ namespace SyteLine.Classes.Activities.Common
     {
         protected int defaultLayoutID = 0;
         protected TextView LoadingTextView;
-        protected BaseBusinessObject BaseObject;
+        protected BaseBusinessObject PrimaryBusinessObject;
         protected bool HasMoreRow = false;
-        protected List<BaseBusinessObject> SencondObjects = new List<BaseBusinessObject>();
+        protected List<BaseBusinessObject> BusinessObjects = new List<BaseBusinessObject>();
         protected List<AdapterList> AdapterLists = new List<AdapterList>();
         protected List<AdapterList> AdapterListTemplate = new List<AdapterList>();
         protected bool StartRefresh = true;
 
+        protected MobileBarcodeScanner Scanner;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            MobileBarcodeScanner.Initialize(Application);
+
             SetTheme(Android.Resource.Style.ThemeHoloLight);
+
             base.OnCreate(savedInstanceState);
             // Set our view from the Inentory layout resource
             if (defaultLayoutID != 0)
@@ -37,13 +44,16 @@ namespace SyteLine.Classes.Activities.Common
             
             try
             {
-                if (!(BaseObject is null))
+                if (!(PrimaryBusinessObject == null))
                 {
-                    if (SencondObjects.Count == 0)
+                    if (BusinessObjects.Count == 0)
                     {
-                        SencondObjects.Add(BaseObject);
+                        BusinessObjects.Add(PrimaryBusinessObject);
                     }
-                    InitialList();
+                    if (!(AdapterLists == null))
+                    {
+                        InitializeActivity();
+                    }
                 }
             }
             catch (Exception Ex)
@@ -53,9 +63,19 @@ namespace SyteLine.Classes.Activities.Common
 
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+        }
+
         public virtual void SetAdapterLists(int BaseObjectIndex, AdapterList adapterList)
         {
-            string propertyList = SencondObjects[BaseObjectIndex].parm.PropertyList;
+            string propertyList = BusinessObjects[BaseObjectIndex].parm.PropertyList;
             foreach (AdapterListItem obj in adapterList.ObjectList.Values)
             {
                 if (!string.IsNullOrEmpty(obj.Name))
@@ -70,14 +90,14 @@ namespace SyteLine.Classes.Activities.Common
                     }
                 }
             }
-            SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
+            BusinessObjects[BaseObjectIndex].parm.PropertyList = propertyList;
             adapterList.ObjIndex = BaseObjectIndex;
             AdapterListTemplate.Add(adapterList);
         }
 
         public virtual void SetAdapterLists(int BaseObjectIndex, string key, string property, ValueTypes type, string lable, int defaultLaoutID = Resource.Layout.CommonLabelTextViewer, Type defaultActivity = null)
         {
-            string propertyList = SencondObjects[BaseObjectIndex].parm.PropertyList;
+            string propertyList = BusinessObjects[BaseObjectIndex].parm.PropertyList;
             if (string.IsNullOrEmpty(propertyList))
             {
                 propertyList = "" + property;
@@ -88,7 +108,7 @@ namespace SyteLine.Classes.Activities.Common
             }
             if (!string.IsNullOrEmpty(property))
             {
-                SencondObjects[BaseObjectIndex].parm.PropertyList = propertyList;
+                BusinessObjects[BaseObjectIndex].parm.PropertyList = propertyList;
             }
             AdapterListTemplate.Add(new AdapterList(key, property, "", lable, type, defaultLaoutID, defaultActivity)
             {
@@ -101,21 +121,21 @@ namespace SyteLine.Classes.Activities.Common
             return AdapterLists;
         }
 
-        protected virtual void AddSecondObject(BaseBusinessObject o)
+        protected virtual void AddBusinessObjects(BaseBusinessObject o)
         {
-            if(SencondObjects.Count == 0)
+            if(BusinessObjects.Count == 0)
             {
-                SencondObjects.Add(BaseObject);
+                BusinessObjects.Add(PrimaryBusinessObject);
             }
-            SencondObjects.Add(o);
+            BusinessObjects.Add(o);
         }
 
         protected virtual BaseBusinessObject GetSecondObject(int index)
         {
-            if (index < SencondObjects.Count)
+            if (index < BusinessObjects.Count)
             {
 
-                return SencondObjects[index];
+                return BusinessObjects[index];
             }else
             {
                 return null;
@@ -134,7 +154,7 @@ namespace SyteLine.Classes.Activities.Common
             }
         }
         
-        protected virtual async void InitialList()
+        protected virtual async void InitializeActivity()
         {
             AdapterListTemplate.Clear();
             AdapterLists.Clear();
@@ -145,7 +165,7 @@ namespace SyteLine.Classes.Activities.Common
 
             try
             {
-                for (int i = 0; i < SencondObjects.Count; i++)
+                for (int i = 0; i < BusinessObjects.Count; i++)
                 {
                     //await Task.Run(async () =>
                     //{
@@ -154,7 +174,7 @@ namespace SyteLine.Classes.Activities.Common
                     //}
                     //);
                     await ReadIDOs(i);
-                    UpdateAdapterLists(i);
+                    PostReadIDOs(i);
                 }
 
                 StartRefresh = true;
@@ -176,15 +196,15 @@ namespace SyteLine.Classes.Activities.Common
             }
         }
 
-        protected virtual void PrepareIDOs()
+        protected virtual void BeforeReadIDOs()
         {
         }
 
-        protected virtual void PrepareIDOs(int index = 0)
+        protected virtual void BeforeReadIDOs(int index)
         {
             if (index == 0)
             {
-                PrepareIDOs();
+                BeforeReadIDOs();
             }
         }
 
@@ -192,14 +212,14 @@ namespace SyteLine.Classes.Activities.Common
         {
             try
             {
-                PrepareIDOs(index);
+                BeforeReadIDOs(index);
 
                 if (StartRefresh)
                 {
-                    await Task.Run(() => SencondObjects[index].Read());
+                    await Task.Run(() => BusinessObjects[index].Read());
                 }
 
-                if (SencondObjects[index].GetRowCount() < int.Parse(new Configure().RecordCap))
+                if (BusinessObjects[index].GetRowCount() < int.Parse(new Configure().RecordCap))
                 {
                     HasMoreRow = false;
                 }
@@ -215,13 +235,13 @@ namespace SyteLine.Classes.Activities.Common
             }
         }
 
-        protected virtual string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        protected virtual string GetPropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
         {
             //called by UpdateAdapterLists;
             return "";
         }
 
-        protected virtual void UpdateAdapterLists(int index = 0)
+        protected virtual void PostReadIDOs(int index = 0)
         {
             ;
         }
@@ -271,12 +291,12 @@ namespace SyteLine.Classes.Activities.Common
 
         protected void SetDefaultIntent(Intent intent)
         {
-            intent.PutExtra("SessionToken", this.Intent.GetStringExtra("SessionToken"));
-            intent.PutExtra("UserName", this.Intent.GetStringExtra("UserName"));
-            intent.PutExtra("UserDesc", this.Intent.GetStringExtra("UserDesc"));
-            intent.PutExtra("DefaultWhse", this.Intent.GetStringExtra("DefaultWhse"));
-            intent.PutExtra("EmpNum", this.Intent.GetStringExtra("EmpNum"));
-            intent.PutExtra("EmpName", this.Intent.GetStringExtra("EmpName"));
+            intent.PutExtra("SessionToken", Intent.GetStringExtra("SessionToken"));
+            intent.PutExtra("UserName", Intent.GetStringExtra("UserName"));
+            intent.PutExtra("UserDesc", Intent.GetStringExtra("UserDesc"));
+            intent.PutExtra("DefaultWhse", Intent.GetStringExtra("DefaultWhse"));
+            intent.PutExtra("EmpNum", Intent.GetStringExtra("EmpNum"));
+            intent.PutExtra("EmpName", Intent.GetStringExtra("EmpName"));
         }
 
         public string SessionToken()
@@ -294,9 +314,19 @@ namespace SyteLine.Classes.Activities.Common
             return this.Intent.GetStringExtra("UserDesc");
         }
 
+        public string DefaultLoc()
+        {
+            return this.Intent.GetStringExtra("DefaultLoc");
+        }
+
         public string DefaultWhse()
         {
             return this.Intent.GetStringExtra("DefaultWhse");
+        }
+
+        public string UserLocalWhse()
+        {
+            return this.Intent.GetStringExtra("UserLocalWhse");
         }
 
         public string EmpNum()
@@ -307,6 +337,40 @@ namespace SyteLine.Classes.Activities.Common
         public string EmpName()
         {
             return this.Intent.GetStringExtra("EmpName");
+        }
+
+        public string CurrentDateTime()
+        {
+            return string.Format("{0} {1}", DateTime.Now.Date.ToShortDateString(), DateTime.Now.Date.ToShortTimeString());
+        }
+
+        public async Task<ZXing.Result> ScanCode()
+        {
+            ZXing.Result result = null;
+            MobileBarcodeScanningOptions opts = new MobileBarcodeScanningOptions
+            {
+                TryHarder = true,
+                PossibleFormats = new List<ZXing.BarcodeFormat>
+                    {
+                    BarcodeFormat.CODE_128,
+                    BarcodeFormat.EAN_13,
+                    BarcodeFormat.EAN_8,
+                    BarcodeFormat.QR_CODE,
+                    BarcodeFormat.CODE_128,
+                    BarcodeFormat.CODE_39,
+                    BarcodeFormat.CODE_93
+                    }
+            };
+            try
+            {
+                Scanner = new MobileBarcodeScanner();
+                result = await Scanner.Scan(opts);
+            }
+            catch (Exception Ex)
+            {
+                Toast.MakeText(this, Ex.Message, ToastLength.Short).Show();
+            }
+            return result;
         }
     }
 }

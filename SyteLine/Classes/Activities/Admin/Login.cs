@@ -99,6 +99,7 @@ namespace SyteLine.Classes.Activities.Admin
                     {
                         CallIDOUsers(SessionToken);
                         CallIDOEmployees(SessionToken);
+                        CallIDOInvParms(SessionToken);
 
                         Intent intent = new Intent(this, typeof(Main));
                         SetDefaultIntent(intent);
@@ -145,6 +146,22 @@ namespace SyteLine.Classes.Activities.Admin
             }
             catch
             {
+                ;
+            }
+        }
+
+        private void CallIDOInvParms(string SessionToken)
+        {
+            try
+            {
+                IDOInvParms invParms = new IDOInvParms(SessionToken);
+                invParms.Read();
+                this.Intent.PutExtra("DefaultLoc", invParms.GetPropertyValue("DefaultLoc"));
+                this.Intent.PutExtra("DefaultWhse", invParms.GetPropertyValue("DefWhse"));
+            }
+            catch
+            {
+                ;
             }
         }
 

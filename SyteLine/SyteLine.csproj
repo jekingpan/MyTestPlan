@@ -23,7 +23,7 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>Full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -32,11 +32,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis />
+    <AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -59,6 +60,9 @@
     <Debugger>Xamarin</Debugger>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastAndroidCamera, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastAndroidCamera.2.0.0\lib\MonoAndroid403\FastAndroidCamera.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.EnterpriseServices" />
@@ -67,6 +71,18 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Core, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.3.2\lib\MonoAndroid403\ZXing.Net.Mobile.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.portable, Version=2.3.2.0, Culture=neutral, PublicKeyToken=830ae994e36ac27d, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.3.2\lib\MonoAndroid403\zxing.portable.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXingNetMobile, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.Mobile.2.3.2\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Activities\Admin\Main.cs" />
@@ -81,8 +97,10 @@
     <Compile Include="Classes\Activities\Inventory\Items.cs" />
     <Compile Include="Classes\Activities\Inventory\ItemDetails.cs" />
     <Compile Include="Classes\Activities\Inventory\Inventory.cs" />
+    <Compile Include="Classes\Activities\Purchase\PurchaseOrderBlanketDetails.cs" />
     <Compile Include="Classes\Activities\Purchase\PurchaseOrderDetails.cs" />
     <Compile Include="Classes\Activities\Purchase\PurchaseOrders.cs" />
+    <Compile Include="Classes\Activities\Purchase\PurchaseOrderReceive.cs" />
     <Compile Include="Classes\Adapters\Common\AdapterList.cs" />
     <Compile Include="Classes\Adapters\Common\CSIBaseAdapter.cs" />
     <Compile Include="Classes\Adapters\Common\CSIBaseDetailsAdapter.cs" />
@@ -90,8 +108,10 @@
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrderDetailsAdapter.cs" />
     <Compile Include="Classes\Adapters\Purchase\PurchaseOrdersAdapter.cs" />
     <Compile Include="Classes\Business\Admin\IDOEmployees.cs" />
+    <Compile Include="Classes\Business\Admin\IDOInvParms.cs" />
     <Compile Include="Classes\Business\Inventory\IDOItemLocs.cs" />
     <Compile Include="Classes\Business\Inventory\IDODcmoves.cs" />
+    <Compile Include="Classes\Business\Purchase\IDOPurchaseOrderBlanketLines.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrderLines.cs" />
     <Compile Include="Classes\Business\Purchase\IDOPurchaseOrders.cs" />
     <Compile Include="Classes\Adapters\Inventory\ItemLocDetailsAdapter.cs" />
@@ -125,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -158,7 +179,7 @@
     <AndroidResource Include="Resources\layout\CommonLabelTextViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\CommonLabelEditViewer.axml">
+    <AndroidResource Include="Resources\layout\CommonSubLabelEditViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CommonLabelMultiLinesTextViewer.axml">
@@ -183,6 +204,21 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\FunctionQuantityMoveViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FunctionPurchaseOrderReceiveViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonLabelEditViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonSubSplitterViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonSubSplitterSmallViewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommonSubLabelTextViewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <None Include="Web References\IDOWebService\IDOWebService.wsdl" />
@@ -296,7 +332,7 @@
     <AndroidResource Include="Resources\drawable\loading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\scanner.jpg" />
+    <AndroidResource Include="Resources\drawable\scanner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

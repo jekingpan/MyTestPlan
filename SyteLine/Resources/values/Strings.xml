@@ -79,6 +79,7 @@
   <string name="Warehouse">Warehouse</string>
   <string name="Location">Location</string>
   <string name="ExpirationDate">Expiration Date</string>
+  <string name="EffectiveDate">Effective Date</string>
   <string name="Transit">Transit</string>
   <string name="Stock">Stock</string>
   <string name="LocType">Location Type</string>
@@ -107,6 +108,7 @@
   <string name="AfterNext3Month">After Next 3 Month</string>
   <string name="Filled">Filled</string>
   <string name="PurchaseOrderDetails">Purchase Order Details</string>
+  <string name="PurchaseOrderBlanketDetails">Purchase Order Blanket Details</string>
   <string name="OrderDate">OrderDate</string>
   <string name="Line">Line</string>
   <string name="OrderLine">Order Line</string>
@@ -127,4 +129,10 @@
   <string name="SNTrack">S/N Track</string>
   <string name="OrderNumber">Order Number</string>
   <string name="OrderRelease">Release Release</string>
+  <string name="Reason">Reason</string>
+  <string name="VendorItem">Vendor Item</string>
+  <string name="BlanketLine">Blanket Line</string>
+  <string name="QuantityReceived">Quantity Received</string>
+  <string name="PromiseDate">Promise Date</string>
+  <string name="Line0"> (Line {0})</string>
 </resources>

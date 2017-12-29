@@ -19,17 +19,17 @@ namespace SyteLine.Classes.Activities.Inventory
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.BaseObject = new IDOItems(base.Intent.GetStringExtra("SessionToken"), this);
-            base.AddSecondObject(new IDOItemLocs(base.Intent.GetStringExtra("SessionToken"), this));
+            base.PrimaryBusinessObject = new IDOItems(SessionToken(), this);
+            base.AddBusinessObjects(new IDOItemLocs(SessionToken(), this));
             base.OnCreate(savedInstanceState);
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
+            base.BeforeReadIDOs();
             try
             {
-                IDOItems Items = (IDOItems)BaseObject;
+                IDOItems Items = (IDOItems)PrimaryBusinessObject;
                 Items.parm.PropertyList = "Item,Description";//,Overview,DerQtyOnHand,UM,MatlType,PMTCode,ProductCode,LotTracked,SerialTracked";
                 SetAdapterLists(0, "-", "", ValueTypes.String, GetString(Resource.String.General), Resource.Layout.CommonSplitterViewer);
                 SetAdapterLists(0, "DerQtyOnHand", "DerQtyOnHand", ValueTypes.Decimal, GetString(Resource.String.OnHandQuantity));
@@ -54,9 +54,9 @@ namespace SyteLine.Classes.Activities.Inventory
             }
         }
 
-        protected override void PrepareIDOs(int index)
+        protected override void BeforeReadIDOs(int index)
         {
-            base.PrepareIDOs(index);
+            base.BeforeReadIDOs(index);
             try
             {
                 if (index == 1)
@@ -69,13 +69,13 @@ namespace SyteLine.Classes.Activities.Inventory
                     SetAdapterLists(index, "Whse", "Whse", ValueTypes.String, GetString(Resource.String.Warehouse) + " - {0}", Resource.Layout.CommonSplitterViewer);
                     SetAdapterLists(index, "WhsName", "WhsName", ValueTypes.String, GetString(Resource.String.WarehouseName));
                     SetAdapterLists(index, "ItmwhseQtyOnHand", "ItmwhseQtyOnHand", ValueTypes.Decimal, GetString(Resource.String.ItmwhseQtyOnHand));
-                    SetAdapterLists(index, "Loc", "Loc", ValueTypes.String, GetString(Resource.String.Location) + " - {0}", Resource.Layout.CommonSplitterSmallViewer);
-                    SetAdapterLists(index, "LocDescription", "LocDescription", ValueTypes.String, GetString(Resource.String.LocDescription)); 
-                    SetAdapterLists(index, "LocType", "LocType", ValueTypes.String, GetString(Resource.String.LocType)); 
-                    SetAdapterLists(index, "Rank", "Rank", ValueTypes.String, GetString(Resource.String.Rank));
-                    SetAdapterLists(index, "ItmIssueBy", "ItmIssueBy", ValueTypes.String, GetString(Resource.String.ItmIssueBy));
-                    SetAdapterLists(index, "QtyOnHand", "QtyOnHand", ValueTypes.Decimal, GetString(Resource.String.QtyOnHand));
-                    SetAdapterLists(index, "QtyRsvd", "QtyRsvd", ValueTypes.Decimal, GetString(Resource.String.QtyRsvd));
+                    SetAdapterLists(index, "Loc", "Loc", ValueTypes.String, GetString(Resource.String.Location) + " - {0}", Resource.Layout.CommonSubSplitterViewer);
+                    SetAdapterLists(index, "LocDescription", "LocDescription", ValueTypes.String, GetString(Resource.String.LocDescription), Resource.Layout.CommonSubLabelTextViewer); 
+                    SetAdapterLists(index, "LocType", "LocType", ValueTypes.String, GetString(Resource.String.LocType), Resource.Layout.CommonSubLabelTextViewer); 
+                    SetAdapterLists(index, "Rank", "Rank", ValueTypes.String, GetString(Resource.String.Rank), Resource.Layout.CommonSubLabelTextViewer);
+                    SetAdapterLists(index, "ItmIssueBy", "ItmIssueBy", ValueTypes.String, GetString(Resource.String.ItmIssueBy), Resource.Layout.CommonSubLabelTextViewer);
+                    SetAdapterLists(index, "QtyOnHand", "QtyOnHand", ValueTypes.Decimal, GetString(Resource.String.QtyOnHand), Resource.Layout.CommonSubLabelTextViewer);
+                    SetAdapterLists(index, "QtyRsvd", "QtyRsvd", ValueTypes.Decimal, GetString(Resource.String.QtyRsvd), Resource.Layout.CommonSubLabelTextViewer);
 
                     itemLoc.BuilderFilterByItem(Intent.GetStringExtra("Item"));
                     itemLoc.BuilderAdditionalFilter("QtyOnHand <> 0");
@@ -95,7 +95,7 @@ namespace SyteLine.Classes.Activities.Inventory
             {
                 base.RegisterAdapter(Append);
 
-                IDOItems Items = (IDOItems)BaseObject;
+                IDOItems Items = (IDOItems)PrimaryBusinessObject;
 
                 SetKey(Items.GetPropertyValue("Item"));
                 SetKeyDescription(Items.GetPropertyValue("Description"));
@@ -113,13 +113,13 @@ namespace SyteLine.Classes.Activities.Inventory
             }
         }
 
-        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        protected override string GetPropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
         {
             string value = "";
             switch (objIndex)
             {
                 case 0:
-                    IDOItems Items = (IDOItems)BaseObject;
+                    IDOItems Items = (IDOItems)PrimaryBusinessObject;
                     value = Items.GetPropertyDisplayedValue(name, row);
                     break;
                 case 1:

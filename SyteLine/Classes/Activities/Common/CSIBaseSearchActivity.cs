@@ -35,13 +35,13 @@ namespace SyteLine.Classes.Activities.Common
             base.RegisterAdapter(Append);
         }
 
-        protected override void InitialList()
+        protected override void InitializeActivity()
         {
             LastKey = "";
 
             ListView = FindViewById<ListView>(Resource.Id.ListView);
 
-            base.InitialList();
+            base.InitializeActivity();
 
             if (AdapterLists.Count != 0)
             {
@@ -57,7 +57,7 @@ namespace SyteLine.Classes.Activities.Common
             {
                 //await Task.Run(() => ReadIDOs());
                 await ReadIDOs();
-                UpdateAdapterLists();
+                PostReadIDOs();
 
                 RegisterAdapter(true);
                 LoadingTextView.Visibility = ViewStates.Gone;
@@ -70,17 +70,17 @@ namespace SyteLine.Classes.Activities.Common
             }
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
+            base.BeforeReadIDOs();
         }
 
-        protected override void UpdateAdapterLists(int index = 0)
+        protected override void PostReadIDOs(int index = 0)
         {
-            base.UpdateAdapterLists(index);
+            base.PostReadIDOs(index);
 
             //foreach (BaseBusinessObject o in  
-            for (int i = 0; i < SencondObjects[index].GetRowCount(); i++) //go through IDO rows
+            for (int i = 0; i < BusinessObjects[index].GetRowCount(); i++) //go through IDO rows
             {
                 foreach (AdapterList ListTemp in AdapterListTemplate)
                 {
@@ -110,32 +110,32 @@ namespace SyteLine.Classes.Activities.Common
                             switch (obj.ValueType)
                             {
                                 case AdapterListItem.ValueTypes.String:
-                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Int:
-                                    colonItem.Value = SencondObjects[index].GetPropertyInt(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyInt(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Decimal:
-                                    colonItem.Value = string.Format("{0:###,###,###,###,##0.00######}", SencondObjects[index].GetPropertyDecimalValue(obj.Name, i));
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = string.Format("{0:###,###,###,###,##0.00######}", BusinessObjects[index].GetPropertyDecimalValue(obj.Name, i));
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Date:
-                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.DateTime:
-                                    colonItem.Value = SencondObjects[index].GetPropertyValue(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyValue(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Bitmap:
-                                    colonItem.Value = SencondObjects[index].GetPropertyBitmap(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyBitmap(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 case AdapterListItem.ValueTypes.Boolean:
-                                    colonItem.Value = SencondObjects[index].GetPropertyBoolean(obj.Name, i);
-                                    colonItem.DisplayedValue = UpdatePropertyDisplayedValue(SencondObjects[index], index, obj.Name, i);
+                                    colonItem.Value = BusinessObjects[index].GetPropertyBoolean(obj.Name, i);
+                                    colonItem.DisplayedValue = GetPropertyDisplayedValue(BusinessObjects[index], index, obj.Name, i);
                                     break;
                                 default:
                                     colonItem.Value = null;
@@ -162,7 +162,7 @@ namespace SyteLine.Classes.Activities.Common
             {
                 args.Handled = false;
                 QueryString = string.Format("%{0}%", args.Query);
-                InitialList();
+                InitializeActivity();
                 args.Handled = true;
             };
 
@@ -185,7 +185,7 @@ namespace SyteLine.Classes.Activities.Common
         {
             if (item.ItemId == Resource.Id.Menu_Refresh)
             {
-                InitialList();
+                InitializeActivity();
             }
             else if (item.ItemId == Resource.Id.Menu_GetMoreRows)
             {

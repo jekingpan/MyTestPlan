@@ -6,6 +6,7 @@ using System;
 using Android.Content;
 using SyteLine.Classes.Activities.Common;
 using SyteLine.Classes.Adapters.Common;
+using SyteLine.Classes.Activities.Inventory;
 
 namespace SyteLine.Classes.Activities.Purchase
 {
@@ -36,7 +37,7 @@ namespace SyteLine.Classes.Activities.Purchase
                 {
                     ThumbId = Resource.Drawable.shipping,
                     Name = GetString(Resource.String.PurchaseReceive),
-                    //ActivityType = typeof(QuantityMove)
+                    ActivityType = typeof(PurchaseOrderReceive)
                 });
                 GridView.Adapter = GridAdapter;
 

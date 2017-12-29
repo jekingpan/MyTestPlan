@@ -112,7 +112,7 @@ namespace SyteLine.Classes.Adapters.Common
         {
             try
             {
-                return ObjectList.GetValueOrDefault(name).DisplayedValue;
+                return string.IsNullOrEmpty(ObjectList.GetValueOrDefault(name).DisplayedValue) ? (string)GetValue(name) : ObjectList.GetValueOrDefault(name).DisplayedValue;
             }
             catch
             {
@@ -185,7 +185,8 @@ namespace SyteLine.Classes.Adapters.Common
             string value = "";
             try
             {
-                value = string.IsNullOrEmpty(GetDisplayedValue(name)) ? (string)GetValue(name) : GetDisplayedValue(name);
+                //value = string.IsNullOrEmpty(GetDisplayedValue(name)) ? (string)GetValue(name) : GetDisplayedValue(name);
+                value = (string)GetValue(name);
                 return value;
             }
             catch

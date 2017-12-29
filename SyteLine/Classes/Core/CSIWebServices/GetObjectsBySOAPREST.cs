@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.IO;
-using Android.Util;
-using Java.IO;
 
 namespace SyteLine.Classes.Core.CSIWebServices
 {
@@ -21,9 +17,11 @@ namespace SyteLine.Classes.Core.CSIWebServices
             string BaseURL = "/IDORequestService/IDOWebService.asmx";
             try
             {
-                Core.CSIWebServices.IDOWebService ido = new Core.CSIWebServices.IDOWebService(parm.Url + BaseURL);
-                //webservice调用完成后触发
-                ido.Timeout = 20000;
+                IDOWebService ido = new IDOWebService(parm.Url + BaseURL)
+                {
+                    //webservice调用完成后触发
+                    Timeout = 20000
+                };
                 if (parm.Command == GetConfigurationNames)
                 {
                     parm.OutPutStrings = ido.GetConfigurationNames();
@@ -64,13 +62,18 @@ namespace SyteLine.Classes.Core.CSIWebServices
             if (!(parm.Filter is null))
             {
                 parm.Filter = parm.Filter.Replace("%", "%25");//replace % for URL path
+                parm.Filter = parm.Filter.Replace("#", "%23");//replace % for URL 
+                parm.Filter = parm.Filter.Replace(",", "%2C");//replace % for URL path
+                parm.Filter = parm.Filter.Replace(";", "%3B");//replace % for URL path
             }
             string BaseURL = "/IDORequestService/MGRestService.svc";
             try
             {
-                Core.CSIWebServices.IDORESTService ido = new Core.CSIWebServices.IDORESTService(parm.Url + BaseURL);
-                //webservice调用完成后触发
-                ido.Timeout = 20000;
+                IDORESTService ido = new IDORESTService(parm.Url + BaseURL)
+                {
+                    //webservice调用完成后触发
+                    Timeout = 20000
+                };
                 if (parm.Command == GetConfigurationNames)
                 {
                     parm.OutPutStrings = ido.GetConfigurationNames();

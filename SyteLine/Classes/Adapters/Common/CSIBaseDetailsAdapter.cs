@@ -46,14 +46,17 @@ namespace SyteLine.Classes.Adapters.Common
                         Switch = view.FindViewById<Switch>(Resource.Id.Switch);
                         Switch.Checked = item.GetBoolean(Key);
                         break;
+                    case Resource.Layout.CommonSubSplitterViewer:
+                    case Resource.Layout.CommonSubSplitterSmallViewer:
                     case Resource.Layout.CommonSplitterViewer:
                     case Resource.Layout.CommonSplitterSmallViewer:
                         break;
+                    case Resource.Layout.CommonSubLabelTextViewer:
                     case Resource.Layout.CommonLabelTextViewer:
                     case Resource.Layout.CommonLabelMultiLinesTextViewer:
                     default:
                         Text = view.FindViewById<TextView>(Resource.Id.Text);
-                        Text.SetText(item.GetString(Key), null);
+                        Text.SetText(item.GetDisplayedValue(Key), null);
                         break;
                 }
                 return view;

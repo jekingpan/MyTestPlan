@@ -107,7 +107,7 @@ namespace SyteLine.Classes.Business.Purchase
         {
             return string.Format(Format, Convert.ToDecimal(base.GetPropertyValue("PoCost", index)));
         }
-        
+
         public override string GetPropertyDisplayedValue(string Name, int Row)
         {
             string value = "";

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:background="@android:drawable/screen_background_light">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
                 android:text="@string/Warehouse"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/WarehouseText"
                 android:singleLine="true"
                 android:width="120dp" />
@@ -27,7 +28,7 @@
                 android:text="@string/Date"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/TramsDateText"
                 android:gravity="right" />
         </LinearLayout>
@@ -40,14 +41,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/WarehouseEdit"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:width="120dp"
                 tools:text="@string/Warehouse" />
             <TextView xmlns:tools="http://schemas.android.com/tools"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/TransDateEdit"
                 android:gravity="right"
                 tools:text="@string/Date" />
@@ -69,17 +70,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout4">
             <TextView xmlns:tools="http://schemas.android.com/tools"
-                android:text="Small Text"
+                android:text="@string/OrderNumber"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/OrderNumText"
                 android:singleLine="true"
                 android:width="150dp"
-                android:layout_marginRight="132dp"
-                tools:text="@string/OrderNumber" />
+                android:layout_marginRight="132dp" />
             <TextView
-                android:text="Small Text"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -88,7 +87,6 @@
                 android:width="50dp"
                 android:layout_marginLeft="-132dp" />
             <TextView
-                android:text="Small Text"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -103,7 +101,7 @@
             android:id="@+id/linearLayout5">
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/OrderNumEdit"
                 android:width="150dp"
                 android:layout_marginRight="132dp"
@@ -114,7 +112,7 @@
             <EditText
                 android:inputType="number"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LineEdit"
                 android:width="50dp"
                 android:layout_marginLeft="-132dp"
@@ -126,7 +124,7 @@
             <EditText
                 android:inputType="number"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/ReleaseEdit"
                 android:width="50dp"
                 android:hint="0"
@@ -134,12 +132,12 @@
                 android:maxLength="3"
                 android:singleLine="true"
                 android:gravity="right" />
-            <ImageButton
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+            <Button
                 android:id="@+id/ScanOrderButton"
-                android:maxWidth="40dp"
-                android:minWidth="40dp"
+                android:minHeight="32dp"
+                android:minWidth="32dp"
+                android:layout_height="32dp"
+                android:layout_width="32dp"
                 android:background="@drawable/scanner" />
         </LinearLayout>
     </LinearLayout>
@@ -171,7 +169,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ItemDescriptionText"
+            android:id="@+id/ItemDescriptionEdit"
             tools:text="@string/Description"
             android:paddingLeft="10dp" />
         <LinearLayout
@@ -185,7 +183,7 @@
             <Switch
                 android:id="@+id/LotSwitch"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/Lot"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:clickable="false"
@@ -193,7 +191,7 @@
             <Switch
                 android:id="@+id/SNSwitch"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/SN"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:editable="false"
@@ -214,7 +212,7 @@
                 android:text="@string/Location"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LocationText" />
         </LinearLayout>
         <LinearLayout
@@ -224,18 +222,16 @@
             android:layout_height="wrap_content">
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LocationEdit"
                 tools:text="@string/Location"
                 android:inputType="textNoSuggestions"
                 android:layout_marginRight="32dp"
                 android:singleLine="true" />
-            <ImageButton
+            <Button
+                android:id="@+id/ScanLocationButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/ScanLocationButton"
-                android:maxWidth="40dp"
-                android:minWidth="40dp"
                 android:layout_marginLeft="-32dp"
                 android:background="@drawable/scanner" />
         </LinearLayout>
@@ -247,14 +243,14 @@
             <TextView
                 android:text="@string/UM"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/UNText" />
             <TextView
                 android:text="@string/Quantity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/QuantityText" />
         </LinearLayout>
         <LinearLayout
@@ -264,16 +260,16 @@
             android:layout_height="wrap_content">
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="100dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/UMEdit"
                 tools:text="@string/UM"
                 android:inputType="textNoSuggestions"
                 android:width="80dp"
                 android:singleLine="true" />
-            <ImageButton
+            <Button
+                android:id="@+id/ScanUMButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/ScanUMButton"
                 android:background="@drawable/scanner" />
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
@@ -286,12 +282,12 @@
                 android:singleLine="true"
                 android:gravity="right"
                 android:layout_marginRight="32dp" />
-            <ImageButton
+            <Button
+                android:id="@+id/ScanQuantityButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/ScanQuantityButton"
-                android:background="@drawable/scanner"
-                android:layout_marginLeft="-32dp" />
+                android:layout_marginLeft="-32dp"
+                android:background="@drawable/scanner" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -302,7 +298,7 @@
                 android:text="@string/Lot"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LotText" />
         </LinearLayout>
         <LinearLayout
@@ -312,18 +308,16 @@
             android:layout_height="wrap_content">
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LotEdit"
                 tools:text="@string/Lot"
                 android:inputType="textNoSuggestions"
                 android:layout_marginRight="32dp"
                 android:singleLine="true" />
-            <ImageButton
+            <Button
+                android:id="@+id/ScanLotButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:id="@+id/ScanLotButton"
-                android:maxWidth="40dp"
-                android:minWidth="40dp"
                 android:layout_marginLeft="-32dp"
                 android:background="@drawable/scanner" />
         </LinearLayout>
@@ -336,7 +330,7 @@
                 android:text="@string/Reason"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/ReasonText" />
         </LinearLayout>
         <LinearLayout
@@ -346,7 +340,7 @@
             android:layout_height="wrap_content">
             <EditText xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/ReasonEdit"
                 tools:text="@string/Reason"
                 android:inputType="textNoSuggestions"

@@ -9,7 +9,8 @@
         android:id="@+id/Label"
         android:clickable="false"
         tools:text="Splitter"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="italic"
+        android:paddingLeft="20dp"
         android:background="@android:drawable/dialog_holo_light_frame" />
 </LinearLayout>

@@ -42,10 +42,10 @@ namespace SyteLine.Classes.Adapters.Inventory
 
             ItemEdit.SetText(item.GetString("Item"), null);
             DescriptionEdit.SetText(item.GetString("Description"), null);
-            OnHandQuantityEdit.SetText(item.GetString("DerQtyOnHand"), null);
-            UnitofMeasureEdit.SetText(item.GetString("UM"), null);
-            MaterialTypeEdit.SetText(item.GetString("MatlType"), null);
-            MaterialSourceEdit.SetText(item.GetString("PMTCode"), null);
+            OnHandQuantityEdit.SetText(item.GetDisplayedValue("DerQtyOnHand"), null);
+            UnitofMeasureEdit.SetText(item.GetDisplayedValue("UM"), null);
+            MaterialTypeEdit.SetText(item.GetDisplayedValue("MatlType"), null);
+            MaterialSourceEdit.SetText(item.GetDisplayedValue("PMTCode"), null);
             ProductCodeEdit.SetText(item.GetString("ProductCode"), null);
             LotTrackedImageView.SetImageResource(item.GetBoolean("LotTracked") ?
                 Android.Resource.Drawable.CheckboxOnBackground: Android.Resource.Drawable.CheckboxOffBackground);

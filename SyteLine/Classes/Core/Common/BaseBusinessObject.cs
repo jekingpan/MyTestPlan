@@ -210,6 +210,18 @@ namespace SyteLine.Classes.Core.Common
             }
         }
 
+        public virtual string GetPropertyDisplayedValue(string Name)
+        {
+            try
+            {
+                return GetPropertyDisplayedValue(Name, CurrentRow);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
         public virtual string GetPropertyDisplayedValue(string Name, int Row)
         {
             string value = "";

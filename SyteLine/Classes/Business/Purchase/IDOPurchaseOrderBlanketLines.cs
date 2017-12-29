@@ -5,15 +5,15 @@ using Android.Content;
 
 namespace SyteLine.Classes.Business.Purchase
 {
-    public class IDOPurchaseOrderLines : BaseBusinessObject
+    public class IDOPurchaseOrderBlanketLines : BaseBusinessObject
     {
-        public IDOPurchaseOrderLines(SOAPParameters parm, Context con = null) : base(parm, con)
+        public IDOPurchaseOrderBlanketLines(SOAPParameters parm, Context con = null) : base(parm, con)
         {
             this.parm = parm;
             DefaultParm();
         }
 
-        public IDOPurchaseOrderLines(string Token, Context con = null) : base(Token, con)
+        public IDOPurchaseOrderBlanketLines(string Token, Context con = null) : base(Token, con)
         {
             DefaultParm();
         }
@@ -21,11 +21,8 @@ namespace SyteLine.Classes.Business.Purchase
         protected override void DefaultParm()
         {
             base.DefaultParm();
-            parm.IDOName = "SLPoItems";
-            parm.PropertyList = "PoNum,PoLine,VendVendNum,VenadrName,Item,Description,DerItemOverview,QtyOrderedConv,UM"
-                + ",Stat,DueDate,PromiseDate,PoVendNum,PoVendorPo,PoStat,PoOrderDate,VendItem,Whse"
-                + ",ManufacturerId,ManufacturerName,ManufacturerItem,ManufacturerItemDesc"
-                + ",RefType,RefNum,RefLineSuf,RefRelease,ShipAddr,DropShipNo,DropSeq,DerShipToAddr";
+            parm.IDOName = "SLPoBlns";
+            parm.PropertyList = "PoNum,PoLine,VendVendNum,VenadrName,Item,ItmDescription,BlanketQty,BlanketQtyConv,UM,Whse";
         }
 
         public void BuilderFilterByPoNum(string PoNum)
@@ -68,9 +65,9 @@ namespace SyteLine.Classes.Business.Purchase
             {
                 return DateTime.ParseExact(GetPropertyValue("PromiseDate", index), "yyyyMMdd HH:mm:ss.fff", System.Globalization.CultureInfo.CurrentCulture).ToShortDateString();
             }
-            catch
+            catch (Exception Ex)
             {
-                return "";
+                throw Ex;
             }
         }
 
@@ -80,9 +77,9 @@ namespace SyteLine.Classes.Business.Purchase
             {
                 return DateTime.ParseExact(GetPropertyValue("DueDate", index), "yyyyMMdd HH:mm:ss.fff", System.Globalization.CultureInfo.CurrentCulture).ToShortDateString();
             }
-            catch
+            catch (Exception Ex)
             {
-                return "";
+                throw Ex;
             }
         }
 
@@ -91,10 +88,9 @@ namespace SyteLine.Classes.Business.Purchase
             try
             {
                 return DateTime.ParseExact(GetPropertyValue("PoOrderDate", index), "yyyyMMdd HH:mm:ss.fff", System.Globalization.CultureInfo.CurrentCulture).ToShortDateString();
-            }
-            catch
+            } catch (Exception Ex)
             {
-                return "";
+                throw Ex;
             }
         }
 

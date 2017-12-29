@@ -16,8 +16,11 @@ namespace SyteLine.Classes.Activities.Inventory
     public class Items : CSIBaseSearchActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {
-            BaseObject = new IDOItems(Intent.GetStringExtra("SessionToken"), this);
+        {            
+            if (PrimaryBusinessObject == null)
+            {
+                PrimaryBusinessObject = new IDOItems(SessionToken(), this);
+            }
             base.OnCreate(savedInstanceState);
         }
 
@@ -41,10 +44,10 @@ namespace SyteLine.Classes.Activities.Inventory
             }
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
-            IDOItems Items = (IDOItems)BaseObject;
+            base.BeforeReadIDOs();
+            IDOItems Items = (IDOItems)PrimaryBusinessObject;
             Items.parm.PropertyList = "";
 
             AdapterList adptList = new AdapterList
@@ -81,13 +84,13 @@ namespace SyteLine.Classes.Activities.Inventory
 
         }
 
-        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        protected override string GetPropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
         {
             string value = "";
             switch (objIndex)
             {
                 case 0:
-                    IDOItems Items = (IDOItems)BaseObject;
+                    IDOItems Items = (IDOItems)PrimaryBusinessObject;
                     value = Items.GetPropertyDisplayedValue(name, row);
                     break;
                 default:

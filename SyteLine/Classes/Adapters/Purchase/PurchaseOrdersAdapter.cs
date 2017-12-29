@@ -40,9 +40,9 @@ namespace SyteLine.Classes.Adapters.Purchase
             PONumEdit.SetText(order.GetString("PoNum"),null);
             VendNumEdit.SetText(order.GetString("VendNum"), null);
             VendorNameEdit.SetText(order.GetString("VendorName"), null);
-            DateEdit.SetText(order.GetString("OrderDate"), null);
-            StatEdit.SetText(order.GetString("Stat"), null);
-            TypeEdit.SetText(order.GetString("Type"), null);
+            DateEdit.SetText(order.GetDisplayedValue("OrderDate"), null);
+            StatEdit.SetText(order.GetDisplayedValue("Stat"), null);
+            TypeEdit.SetText(order.GetDisplayedValue("Type"), null);
             WhseEdit.SetText(order.GetString("Whse"), null);
 
             return view;

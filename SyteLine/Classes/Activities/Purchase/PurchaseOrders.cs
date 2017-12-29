@@ -22,7 +22,7 @@ namespace SyteLine.Classes.Activities.Purchase
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            BaseObject = new IDOPurchaseOrders(Intent.GetStringExtra("SessionToken"), this);
+            PrimaryBusinessObject = new IDOPurchaseOrders(Intent.GetStringExtra("SessionToken"), this);
             base.OnCreate(savedInstanceState);
         }
 
@@ -30,10 +30,20 @@ namespace SyteLine.Classes.Activities.Purchase
         {
             base.ListViewClicked(sender, args);
             PurchaseOrdersAdapter po = (PurchaseOrdersAdapter)ListView.Adapter;
-            Intent intent = new Intent(this, typeof(PurchaseOrderDetails));
-            SetDefaultIntent(intent);
-            intent.PutExtra("PoNum", po.objectList[args.Position].GetString("PoNum"));
-            StartActivity(intent);
+            if (po.objectList[args.Position].GetString("Type") == "R")
+            {
+                Intent intent = new Intent(this, typeof(PurchaseOrderDetails));
+                SetDefaultIntent(intent);
+                intent.PutExtra("PoNum", po.objectList[args.Position].GetString("PoNum"));
+                StartActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(this, typeof(PurchaseOrderBlanketDetails));
+                SetDefaultIntent(intent);
+                intent.PutExtra("PoNum", po.objectList[args.Position].GetString("PoNum"));
+                StartActivity(intent);
+            }
         }
 
         protected override void RegisterAdapter(bool Append)
@@ -46,10 +56,10 @@ namespace SyteLine.Classes.Activities.Purchase
             }
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
-            IDOPurchaseOrders Orders = (IDOPurchaseOrders)BaseObject;
+            base.BeforeReadIDOs();
+            IDOPurchaseOrders Orders = (IDOPurchaseOrders)PrimaryBusinessObject;
             Orders.parm.PropertyList = "";
             AdapterList adptList = new AdapterList()
             {
@@ -84,13 +94,13 @@ namespace SyteLine.Classes.Activities.Purchase
             Orders.BuilderAdditionalFilter(string.Format("Stat IN (N'P', N'O') AND Whse = N'{0}'", DefaultWhse()));
         }
 
-        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        protected override string GetPropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
         {
             string value = "";
             switch (objIndex)
             {
                 case 0:
-                    IDOPurchaseOrders POs = (IDOPurchaseOrders)BaseObject;
+                    IDOPurchaseOrders POs = (IDOPurchaseOrders)PrimaryBusinessObject;
                     value = POs.GetPropertyDisplayedValue(name, row);
                     break;
                 default:
@@ -126,7 +136,7 @@ namespace SyteLine.Classes.Activities.Purchase
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
                 DateQueryString = string.Format("OrderDate < N'{0}'", Date);//"{datediff}(month ,getdate(), OrderDate) < -3";
-                InitialList();
+                InitializeActivity();
             }
             else if (item.ItemId == Resource.String.InLast3Month)
             {
@@ -135,7 +145,7 @@ namespace SyteLine.Classes.Activities.Purchase
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
                 DateQueryString = string.Format("OrderDate Between N'{0}' and N'{1}'", Date, Date2);//"{datediff}(day,getdate(), OrderDate) < 0 AND {datediff}(month ,getdate(), OrderDate) >= -3";
-                InitialList();
+                InitializeActivity();
             }
             else if (item.ItemId == Resource.String.InThisMonth)
             {
@@ -144,13 +154,13 @@ namespace SyteLine.Classes.Activities.Purchase
                 item.SetChecked(!item.IsChecked);
                 DateQueryMenu = item.IsChecked ? item.ItemId : 0;
                 DateQueryString = string.Format("OrderDate Between N'{0}' and N'{1}'", Date, Date2);//"{datediff}(month ,getdate(), OrderDate) = 0";
-                InitialList();
+                InitializeActivity();
             }
             else if (item.ItemId == Resource.String.All)
             {
                 DateQueryString = "";
                 DateQueryMenu = 0;
-                InitialList();
+                InitializeActivity();
             }
             return base.OnOptionsItemSelected(item);
         }

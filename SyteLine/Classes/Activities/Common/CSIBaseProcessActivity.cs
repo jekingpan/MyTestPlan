@@ -17,7 +17,7 @@ namespace SyteLine.Classes.Activities.Common
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            if (defaultLayoutID != 0){
+            if (defaultLayoutID == 0){
 
                 defaultLayoutID = Resource.Layout.CommonListViewer;
             }
@@ -35,27 +35,27 @@ namespace SyteLine.Classes.Activities.Common
             base.RegisterAdapter(Append);
         }
 
-        protected override void InitialList()
+        protected override void InitializeActivity()
         {
             ListView = FindViewById<ListView>(Resource.Id.ListView);
 
             ListView.ItemClick += ListViewClicked;
-            base.InitialList();
+            base.InitializeActivity();
         }
 
-        protected override void PrepareIDOs()
+        protected override void BeforeReadIDOs()
         {
-            base.PrepareIDOs();
+            base.BeforeReadIDOs();
         }
 
-        protected override string UpdatePropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
+        protected override string GetPropertyDisplayedValue(BaseBusinessObject obj, int objIndex, string name, int row)
         {
-            return base.UpdatePropertyDisplayedValue(obj, objIndex, name, row);
+            return base.GetPropertyDisplayedValue(obj, objIndex, name, row);
         }
 
-        protected override void UpdateAdapterLists(int index = 0)
+        protected override void PostReadIDOs(int index = 0)
         {
-            base.UpdateAdapterLists(index);
+            base.PostReadIDOs(index);
             foreach (AdapterList ListTemp in AdapterListTemplate)
             {
                 if (ListTemp.ObjIndex != index)
